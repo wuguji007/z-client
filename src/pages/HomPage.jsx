@@ -42,14 +42,13 @@ export default function Home() {
             </section>
 
             {/* flash sale 限時搶購 */}
-            <section className="flash-sale bg-primary py-5">
-
+            <section className="flash-sale bg-primary-900 p-0">
+                <div className="container p-120">
+                    <h4 className="text-primary-200 fw-bold fs-4 mb-3">HURRY UP !</h4>
+                    <h2 className="text-white fw-bold me-4 mb-7"><span className="title-line">限時搶購</span></h2>
+                </div>
             </section>
 
-            
-            <div className="container">
-                主要內容區塊
-            </div>
 
         </>
 
