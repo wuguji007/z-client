@@ -1,0 +1,21 @@
+// LOGO-size
+.w-240 {
+  width: 240px;
+}
+
+.h-62 {
+  height: 62px;
+}
+
+.search-bar {
+  position: relative;
+  .search {   
+    margin-left: 12px;
+    }
+
+  .search-btn {
+    margin-right: 8px;
+    position: absolute;
+    left: 0;
+  }
+}

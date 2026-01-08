@@ -1,0 +1,22 @@
+@import 'bootstrap/scss/functions';
+@import 'variables';
+@import 'bootstrap/scss/bootstrap';
+@import '../assets/navbar.scss';
+@import '../assets/swiper-component.scss';
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.container {
+  width: 1296px;
+}
+
+a {
+  text-decoration: none;
+  color: $secondary;
+
+  &:hover {
+    color: darken($secondary, 10%);
+  }
+}
