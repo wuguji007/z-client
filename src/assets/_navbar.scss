@@ -19,3 +19,13 @@
     left: 0;
   }
 }
+
+.nav-link {
+    color: $primary;
+
+    &:hover {
+      color: white;
+      background-color: $primary;
+      
+    }
+}

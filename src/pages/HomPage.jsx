@@ -36,10 +36,17 @@ export default function Home() {
             </div>
             
 
-            {/* 主要內容區塊 */} 
+            {/* swiper 輪播圖 */} 
             <section className="hero">
                 <SwiperComponent />
             </section>
+
+            {/* flash sale 限時搶購 */}
+            <section className="flash-sale bg-primary py-5">
+
+            </section>
+
+            
             <div className="container">
                 主要內容區塊
             </div>

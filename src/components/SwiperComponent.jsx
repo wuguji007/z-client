@@ -1,8 +1,12 @@
 import { useState} from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 
 export default function SwiperTemplate() {
@@ -29,19 +33,27 @@ export default function SwiperTemplate() {
 
     return (
         <>
-            <Swiper>
+            <Swiper
+                modules={[Pagination, Autoplay]}
+                pagination={{
+                    clickable: true
+                }}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }}
+            >
                 {carouselData.map((item) => (
-                    <SwiperSlide key={item.id}>
+                    <SwiperSlide key={item.id} className='slide-container'>
                         <img src={item.image} className="d-block w-100 slide-img" alt={`Slide ${item.id}`} />
-                        <div className="container carousel-caption d-none d-md-block text-end">
+                        <div className="container carousel-caption carousel-caption-center d-none d-md-block text-end">
                             <h1 className='swiper-title fw-bold'>{item.title}</h1>
                             <p className='fs-3'>{item.description}</p>
-                            <button className='btn border-primary border-1 bg-white rounded-pill py-4 px-7 fs-5 fw-bold text-primary'>立即查看優惠</button>
+                            <button type='button' className='btn btn-border-primary border-1 rounded-pill py-4 px-7 fs-5 fw-bold'>立即查看優惠</button>
                         </div>                       
                     </SwiperSlide>                    
                 ))}
-            </Swiper>
-            
+            </Swiper>            
         </>
     )
 }

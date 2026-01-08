@@ -92,7 +92,7 @@ export default function NavBar() {
                             {/* 登入/註冊 */}
                             <div className="ms-3">
                                 <button className="btn border-primary rounded-pill p-0">
-                                    <Link className="nav-link fw-bold text-primary py-4 px-7" to="/loggin">登入/註冊</Link>
+                                    <Link className="nav-link rounded-pill fw-bold py-4 px-7" to="/loggin">登入/註冊</Link>
                                 </button>
                             </div>                        
                         </div>
