@@ -49,7 +49,7 @@ export default function SwiperTemplate() {
                         <div className="container carousel-caption carousel-caption-center d-none d-md-block text-end">
                             <h1 className='swiper-title fw-bold'>{item.title}</h1>
                             <p className='fs-3'>{item.description}</p>
-                            <button type='button' className='btn btn-border-primary border-1 rounded-pill py-4 px-7 fs-5 fw-bold'>立即查看優惠</button>
+                            <button type='button' className='btn btn-border-primary rounded-pill py-4 px-7 fs-5 fw-bold'>立即查看優惠</button>
                         </div>                       
                     </SwiperSlide>                    
                 ))}

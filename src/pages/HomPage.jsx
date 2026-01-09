@@ -1,5 +1,92 @@
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import SwiperComponent from "../components/SwiperComponent.jsx"
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+
+
+
+const CardSwiper = () => {
+
+    // 暫時用設計稿上的假資料
+    const cardSwiperData = [
+        {
+            id: 1,
+            title: "嚴選紅茶茶包組（熱泡／冷泡適用）",
+            image: "/images/limit-product-1.svg",
+            price: "399",
+            origin_price: "499",
+        },
+        {
+            id: 2,
+            title: "無線藍牙耳罩式耳機",
+            image: "/images/limit-product-2.svg",
+            price: "5399",
+            origin_price: "6099",
+        },
+        {
+            id: 3,
+            title: "智慧空氣清淨機（家用型）",
+            image: "/images/limit-product-3.svg",
+            price: "7999",
+            origin_price: "8099",
+        },
+        {
+            id: 4,
+            title: "保濕滋養沐浴乳",
+            image: "/images/limit-product-4.svg",
+            price: "129",
+            origin_price: "209",
+        },
+        {
+            id: 5,
+            title: "嚴選紅茶茶包組（熱泡／冷泡適用）",
+            image: "/images/limit-product-1.svg",
+            price: "399",
+            origin_price: "499",
+        },
+        {
+            id: 6,
+            title: "無線藍牙耳罩式耳機",
+            image: "/images/limit-product-2.svg",
+            price: "5399",
+            origin_price: "6099",
+        }
+    ];
+
+    return (
+        <>
+            <Swiper
+                slidesPerView={4}
+                spaceBetween={30}
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                        
+            >
+                {cardSwiperData.map((card) => (
+                <SwiperSlide key={card.id} className="swiper-slide">
+                        <div className="card h-auto border-0 p-5">
+                            <img src={card.image} className="card-img-top mb-4" alt={card.title} />
+                            <div className="card-body p-0 mb-4">
+                                <h5 className="card-title fw-bold fs-5 text-primary-950">{card.title}</h5>
+                                <p className="card-text fw-bold fs-5 text-primary-950">NT${card.price} <del className="text-secondary fs-6 fw-normal">NT${card.origin_price}</del></p>
+                            </div>
+                            <button className="btn btn-primary fw-bold py-4 rounded-pill w-100">加入購物車</button>
+                        </div>                  
+                </SwiperSlide>
+                ))}
+            </Swiper>             
+        </>
+    )
+}
+
 
 
 export default function Home() {
@@ -45,7 +132,11 @@ export default function Home() {
             <section className="flash-sale bg-primary-900 p-0">
                 <div className="container p-120">
                     <h4 className="text-primary-200 fw-bold fs-4 mb-3">HURRY UP !</h4>
-                    <h2 className="text-white fw-bold me-4 mb-7"><span className="title-line">限時搶購</span></h2>
+                    <h2 className="text-white fw-bold me-4 mb-7"><span className="title-line">限時搶購</span>
+                    </h2>
+                    <div>
+                        <CardSwiper />
+                    </div>                    
                 </div>
             </section>
 

@@ -73,7 +73,7 @@ export default function NavBar() {
                 <div className="container p-0">
                     <div className="container container-fluid d-flex flex-column">
                         <div className="d-flex justify-content-between align-items-center py-0">
-                            <Link className="navbar-brand w-240 h-62" to="/">
+                            <Link className="navbar-brand w-240 h-62 p-0 my-0" to="/">
                                 <img src="./images/zonama-logo.svg" alt="logo" />
                             </Link>
 

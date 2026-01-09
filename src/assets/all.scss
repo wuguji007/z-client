@@ -41,7 +41,7 @@ h1 {
 
 .btn-border-primary {
   background-color: white;
-  border: $primary;
+  border: 1px $primary solid;
   color: $primary;
 
   &:hover {
@@ -51,6 +51,7 @@ h1 {
 }
 
 
+// 標題帶線條效果
 h2 {
   position: relative; /* 為偽元素定位提供基準 */
   display: flex;
@@ -77,3 +78,7 @@ h2::before{
   padding-right: 20px;
 }
 
+.swiper-slide {
+  height: auto;
+  display: flex;
+}
