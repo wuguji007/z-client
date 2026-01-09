@@ -12,7 +12,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
 
-
 const CardSwiper = () => {
 
     // 暫時用設計稿上的假資料
@@ -65,10 +64,7 @@ const CardSwiper = () => {
         <>
             <Swiper
                 slidesPerView={4}
-                spaceBetween={30}
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                        
+                spaceBetween={30}                        
             >
                 {cardSwiperData.map((card) => (
                 <SwiperSlide key={card.id} className="swiper-slide">
