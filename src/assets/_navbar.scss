@@ -29,3 +29,38 @@
       
     }
 }
+
+.loggin-btn {
+  width: 100%;
+  font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+  .nav-link {
+  width: 100%;
+  font-size: 10px;
+  }
+}
+
+
+@media (max-width: 568px) {
+  .navbar {
+    padding: 0px;
+  }
+
+
+  .loggin-btn {
+      width: 100%;
+      font-size: 14px;
+  }
+}
+
+
+// @media (max-width: 375px) {
+//      .loggin-btn {
+//           width: 100%;
+//           font-size: 14px;
+//           padding: 12px 24px;
+//      }
+// }

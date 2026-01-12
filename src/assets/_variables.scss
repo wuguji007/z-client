@@ -18,6 +18,7 @@
 // $gray-900: #212529 !default;
 // $black:    #000 !default;
 $white:    #FFFFFF !default;
+$gray-50:  #F4F4F4 !default; //自定義
 $gray-100: #DBDBDB !default;
 $gray-200: #C4C4C4 !default;
 $gray-300: #ADADAD !default;
@@ -385,23 +386,19 @@ $theme-colors: (
   "danger-light":   $danger-light,
   "danger-dark":    $danger-dark,
   "light":          $light,
-  "dark":           $dark
+  "dark":           $dark,
+  "gray-50":        #F4F4F4, //自定義
+  "gray-100":       #DBDBDB,
+  "gray-200":       #C4C4C4,
+  "gray-300":       #ADADAD,
+  "gray-400":       #969696,
+  "gray-500":       #808080,
+  "gray-600":       #666666,
+  "gray-700":       #4D4D4D,
+  "gray-800":       #333333,
+  "gray-900":       #1A1A1A,  
 ) !default;
 // scss-docs-end theme-colors-map
-
-$blue-50: #EFFAFC !default;
-$blue-100: #D5F1F8 !default;
-$blue-200: #B1E2F0 !default;
-$blue-300: #7BCCE5 !default;
-$blue-400: #2EA2C9 !default;
-$blue-500: #2290B8 !default;
-$blue-600: $blue !default; 
-$blue-700: #1F5F7F !default;
-$blue-800: #224F68 !default;
-$blue-900: #204259 !default;
-$blue-950: #102B3C !default;
-
-
 
 
 // scss-docs-start theme-text-variables
