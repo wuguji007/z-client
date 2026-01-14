@@ -3,7 +3,7 @@ import { Mail, Phone, ArrowUp } from "lucide-react"
 
 export default function Footer() {
     return (
-        <div className="footer bg-gray-900 py-80 px-3 px-md-0">
+        <div className="footer bg-gray-900 py-80">
             <div className="footer-info container d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 mb-md-5">
                 <Link to="/">
                     <img src="/images/zonama-logo-lg.svg" alt="logo" className="mb-5 mb-md-0" />
@@ -26,6 +26,7 @@ export default function Footer() {
                 </div>                
             </div>
 
+            {/* 水平線 */}
             <div className="container flex-grow-1 bg-white mb-3 mb-md-5" style={{ height: '1px' }}></div>
             
             <div className="container d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center text-white p-md-0">
@@ -36,7 +37,9 @@ export default function Footer() {
                 </div>
             </div>
 
-            <button className="btn rounded-circle back-to-top-btn border-none"><ArrowUp size={40} /></button>
+            <button className="btn rounded-circle back-to-top-btn border-none">
+                <a href="#nav-top" className="back-to-top"><ArrowUp size={40} /></a>
+                </button>
         </div>
     )
 }

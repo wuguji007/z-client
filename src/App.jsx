@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/Navbar.jsx'
+import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx';
 import HomePage from './pages/HomPage.jsx';
 import LogginPage from './pages/LogginPage.jsx';
@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <NavBar />
+        <Header />
         <div className="App-container">
           <Routes>
             <Route path="/" element={<HomePage />} />
