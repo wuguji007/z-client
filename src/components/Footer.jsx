@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="footer bg-gray-900 py-80">
             <div className="footer-info container d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 mb-md-5">
                 <Link to="/">
-                    <img src="images/zonama-logo-lg.svg" alt="logo" className="mb-5 mb-md-0" />
+                    <img src="./images/zonama-logo-lg.svg" alt="logo" className="mb-5 mb-md-0" />
                 </Link>                
                 <div className="row">
                     <div className="footer-text col-12 d-flex justify-content-center">
