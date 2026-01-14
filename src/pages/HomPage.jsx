@@ -27,77 +27,77 @@ const cardSwiperData = [
     {
         id: 1,
         title: "嚴選紅茶茶包組（熱泡／冷泡適用）",
-        image: "./images/limit-product-1.svg",
+        image: "/images/limit-product-1.svg",
         price: "399",
         origin_price: "499",
     },
     {
         id: 2,
         title: "無線藍牙耳罩式耳機",
-        image: "./images/limit-product-2.svg",
+        image: "/images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 3,
         title: "智慧空氣清淨機（家用型）",
-        image: "./images/limit-product-3.svg",
+        image: "/images/limit-product-3.svg",
         price: "7999",
         origin_price: "8099",
     },
     {
         id: 4,
         title: "保濕滋養沐浴乳",
-        image: "./images/limit-product-4.svg",
+        image: "/images/limit-product-4.svg",
         price: "129",
         origin_price: "209",
     },
     {
         id: 5,
         title: "嚴選紅茶茶包組（熱泡／冷泡適用）",
-        image: "./images/limit-product-1.svg",
+        image: "/images/limit-product-1.svg",
         price: "399",
         origin_price: "499",
     },
     {
         id: 6,
         title: "無線藍牙耳罩式耳機",
-        image: "./images/limit-product-2.svg",
+        image: "/images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 7,
         title: "無線藍牙耳罩式耳機",
-        image: "./images/limit-product-2.svg",
+        image: "/images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 8,
         title: "無線藍牙耳罩式耳機",
-        image: "./images/limit-product-2.svg",
+        image: "/images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 9,
         title: "無線藍牙耳罩式耳機",
-        image: "./images/limit-product-2.svg",
+        image: "/images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 10,
         title: "無線藍牙耳罩式耳機",
-        image: "./images/limit-product-2.svg",
+        image: "/images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 11,
         title: "無線藍牙耳罩式耳機",
-        image: "./images/limit-product-2.svg",
+        image: "/images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     }
@@ -537,7 +537,7 @@ export default function Home() {
                         <div className="row bg-primar-50 align-items-stretch">
                             <div className="col-12 col-md-4 px-md-0 h-100">
                                 <div className="border-4 mb-3 mb-md-0 h-100">
-                                <img src="/images/promo-pet.svg" alt="pet-supplies" className='promo-img'/>
+                                <img src="./images/promo-pet.svg" alt="pet-supplies" className='promo-img'/>
                                 </div>
                             </div>
                             {/* 網格卡片輪播 */}
@@ -567,7 +567,7 @@ export default function Home() {
                         <div className="row bg-primar-50 align-items-stretch">
                             <div className="col-12 col-md-4 px-md-0 h-100">
                                 <div className="border-4 mb-3 mb-md-0 h-100">
-                                <img src="/images/promo-food.svg" alt="pet-supplies" className='promo-img'/>
+                                <img src="./images/promo-food.svg" alt="pet-supplies" className='promo-img'/>
                                 </div>
                             </div>
                             {/* 網格卡片輪播 */}
