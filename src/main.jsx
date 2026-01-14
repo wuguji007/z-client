@@ -8,7 +8,7 @@ import './assets/all.scss'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/z-client">
       <App />
     </BrowserRouter>
   </StrictMode>,

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom"
 import HeroSwiper from "../components/HeroSwiper.jsx"
+import { getImageUrl } from "../utils/imageHelper.js"
 import { ChevronLeft, ChevronRight, ShoppingCart, Cat, CookingPot } from 'lucide-react';
 
 // Import Swiper React components
@@ -27,77 +28,77 @@ const cardSwiperData = [
     {
         id: 1,
         title: "嚴選紅茶茶包組（熱泡／冷泡適用）",
-        image: "/images/limit-product-1.svg",
+        image: "images/limit-product-1.svg",
         price: "399",
         origin_price: "499",
     },
     {
         id: 2,
         title: "無線藍牙耳罩式耳機",
-        image: "/images/limit-product-2.svg",
+        image: "images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 3,
         title: "智慧空氣清淨機（家用型）",
-        image: "/images/limit-product-3.svg",
+        image: "images/limit-product-3.svg",
         price: "7999",
         origin_price: "8099",
     },
     {
         id: 4,
         title: "保濕滋養沐浴乳",
-        image: "/images/limit-product-4.svg",
+        image: "images/limit-product-4.svg",
         price: "129",
         origin_price: "209",
     },
     {
         id: 5,
         title: "嚴選紅茶茶包組（熱泡／冷泡適用）",
-        image: "/images/limit-product-1.svg",
+        image: "images/limit-product-1.svg",
         price: "399",
         origin_price: "499",
     },
     {
         id: 6,
         title: "無線藍牙耳罩式耳機",
-        image: "/images/limit-product-2.svg",
+        image: "images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 7,
         title: "無線藍牙耳罩式耳機",
-        image: "/images/limit-product-2.svg",
+        image: "images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 8,
         title: "無線藍牙耳罩式耳機",
-        image: "/images/limit-product-2.svg",
+        image: "images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 9,
         title: "無線藍牙耳罩式耳機",
-        image: "/images/limit-product-2.svg",
+        image: "images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 10,
         title: "無線藍牙耳罩式耳機",
-        image: "/images/limit-product-2.svg",
+        image: "images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     },
     {
         id: 11,
         title: "無線藍牙耳罩式耳機",
-        image: "/images/limit-product-2.svg",
+        image: "images/limit-product-2.svg",
         price: "5399",
         origin_price: "6099",
     }
@@ -125,7 +126,7 @@ const CardSwiper = () => {
                         {cardSwiperData.map((card) => (
                         <SwiperSlide key={card.id} className="swiper-slide">
                             <div className="card h-auto border-0 p-3 p-md-5">
-                                <img src={card.image} className="card-img-top mb-0 mb-md-4" alt={card.title} />
+                                <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} />
                                 <div className="card-body p-0 mb-4">
                                     <h5 className="card-title fw-bold fs-5 text-primary-950 mb-20">{card.title}</h5>
                                     <p className="card-text fs-5 text-primary-950">NT${card.price} <del className="text-gray-300 fs-6 fw-normal">NT${card.origin_price}</del></p>
@@ -162,7 +163,7 @@ const GreyCardSwiper = () => {
                         {cardSwiperData.map((card) => (
                         <SwiperSlide key={card.id} className="swiper-slide">
                             <div className="card bg-gray-50 h-auto border-0 p-3 p-md-5">
-                                <img src={card.image} className="card-img-top mb-0 mb-md-4" alt={card.title} />
+                                <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} />
                                 <div className="card-body p-0 mb-4">
                                     <h5 className="card-title fw-bold fs-5 text-primary-950">{card.title}</h5>
                                     <p className="card-text fs-5 fs-md-4 text-primary-950">NT${card.price} <del className="text-gray-300 fs-5 fw-normal">NT${card.origin_price}</del></p>
@@ -359,7 +360,7 @@ const CardCarousel = () => {
                             <div className="col-6">
                               <div className="card-img-wrapper">
                                 <img 
-                                  src={product.image} 
+                                  src={`${import.meta.env.BASE_URL}${product.image}`} 
                                   className="card-img-top" 
                                   alt={product.title} 
                                 />
@@ -537,7 +538,7 @@ export default function Home() {
                         <div className="row bg-primar-50 align-items-stretch">
                             <div className="col-12 col-md-4 px-md-0 h-100">
                                 <div className="border-4 mb-3 mb-md-0 h-100">
-                                <img src="./images/promo-pet.svg" alt="pet-supplies" className='promo-img'/>
+                                <img src={`${import.meta.env.BASE_URL}images/promo-pet.svg`} alt="pet-supplies" className='promo-img'/>
                                 </div>
                             </div>
                             {/* 網格卡片輪播 */}
@@ -567,7 +568,7 @@ export default function Home() {
                         <div className="row bg-primar-50 align-items-stretch">
                             <div className="col-12 col-md-4 px-md-0 h-100">
                                 <div className="border-4 mb-3 mb-md-0 h-100">
-                                <img src="./images/promo-food.svg" alt="pet-supplies" className='promo-img'/>
+                                <img src={`${import.meta.env.BASE_URL}images/promo-food.svg`} alt="pet-supplies" className='promo-img'/>
                                 </div>
                             </div>
                             {/* 網格卡片輪播 */}
