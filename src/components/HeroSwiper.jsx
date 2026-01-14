@@ -13,19 +13,19 @@ export default function SwiperTemplate() {
     const [carouselData] = useState([
         {
             id: 1,
-            image: "/images/swiper-1.svg",
+            image: "images/swiper-1.svg",
             title: "生活家電全面折扣",
             description: "11/24-12/08 全館特價優惠",
         },
         {
             id: 2,
-            image: "/images/swiper-2.svg",
+            image: "images/swiper-2.svg",
             title: "冬天乾肌保養大補帖",
             description: "保養品最低五折起！",
         },
         {
             id: 3,
-            image: "/images/swiper-3.svg",
+            image: "images/swiper-3.svg",
             title: "居家裝潢修繕服務",
             description: "家用五金全面促銷中，滿千折百最划算",
         },
