@@ -17,9 +17,50 @@ import 'swiper/css/grid';
 
 // 暫時用的類別假資料
 const categories = [
-    "生活用品", "食品飲料", "美妝保養", "數位家電", "嬰幼兒", 
-    "寵物用品", "室內居家", "運動生活", "廚房用具", "手作禮品", 
-    "限時搶購"
+    {
+        id: 1,
+        category: "生活用品",
+    },
+    {
+        id: 2,
+        category: "食品飲料",
+    },
+    {
+        id: 3,
+        category: "美妝保養",
+    },
+    {
+        id: 4,
+        category: "數位家電",
+    },
+    {
+        id: 5,
+        category: "嬰幼兒",
+    },
+    {
+        id: 6,
+        category: "寵物用品",
+    },
+    {
+        id: 7,
+        category: "室內居家",
+    },
+    {
+        id: 8,
+        category: "運動生活",
+    },
+    {
+        id: 9,
+        category: "廚房用具",
+    },
+    {
+        id: 10,
+        category: "手作禮品",
+    },
+    {
+        id: 11,
+        category: "限時搶購",
+    },
   ];
 
 
@@ -211,7 +252,7 @@ const CardCarousel = () => {
   return (
     <div className="d-flex flex-column">
       
-      <style>{`
+        <style>{`
         /* 覆蓋 Bootstrap Carousel 預設樣式 */
         .carousel-item {
           transition: transform 0.6s ease-in-out;
@@ -318,98 +359,95 @@ const CardCarousel = () => {
 
         <div className="position-relative px-0 px-md-4">
           
-          {/* 輪播主體 */}
-          <div id="productGridCarousel" className="carousel slide">
+            {/* 輪播主體 */}
+            <div id="productGridCarousel" className="carousel slide">
             
-            {/* 左右導航按鈕 (Lucide Icons) */}
-            <button 
-              className="nav-btn nav-prev" 
-              onClick={prevSlide}
-              aria-label="Previous Slide"
-            >
-              <ChevronLeft size={24} color="#333" />
-            </button>
-            <button 
-              className="nav-btn nav-next" 
-              onClick={nextSlide}
-              aria-label="Next Slide"
-            >
-              <ChevronRight size={24} color="#333" />
-            </button>
+                {/* 左右導航按鈕 (Lucide Icons) */}
+                <button 
+                className="nav-btn nav-prev" 
+                onClick={prevSlide}
+                aria-label="Previous Slide"
+                >
+                <ChevronLeft size={24} color="#333" />
+                </button>
+                <button 
+                className="nav-btn nav-next" 
+                onClick={nextSlide}
+                aria-label="Next Slide"
+                >
+                <ChevronRight size={24} color="#333" />
+                </button>
 
                   
-            <div className="carousel-inner">
-              {slides.map((slideProducts, slideIndex) => (
-                <div 
-                  key={slideIndex} 
-                  className={`carousel-item ${slideIndex === activeIndex ? 'active' : ''}`}
-                  >
-                      
-                <div className="grid-container-wrapper"> 
-                  {/* Grid 結構: g-0 (No Gutters) */}
-                  <div className="row g-0">
-                    {slideProducts.map((product) => (
-                      /* 響應式設定: 
-                        col-12: 手機單欄 (每頁6個 = 6行)
-                        col-md-6: 電腦雙欄 (每頁6個 = 3行) 
-                      */
-                      <div key={product.id} className="col-12 col-md-6">
-                        <div className="grid-card product-card">
-                          <div className="row g-0">
-                            {/* 修改為水平卡片佈局在手機上可能更好看，但這裡維持垂直卡片風格 */}
-                            <div className="col-6">
-                              <div className="card-img-wrapper">
-                                <img 
-                                  src={`${import.meta.env.BASE_URL}${product.image}`} 
-                                  className="card-img-top" 
-                                  alt={product.title} 
-                                />
-                              </div>
-                            </div>
-                                    
-                            <div className="col-6 d-flex flex-column flex-grow-1">
-                                <div className="card-body d-flex flex-column p-3">                              
-                                    <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{product.title}</h6>
-                                    
-                                    <div className="d-flex justify-content-between flex-column align-items-start mt-auto pt-2 border-top">
-                                        <span className="text-primary-950 fs-4 mb-2">NT${product.price}<del className='text-gray-300 fs-6 fs-md-5'>${product.origin_price}</del></span>
-                                        <button className="btn bg-primary text-white fw-bold btn-sm rounded-pill w-100 py-3 d-flex align-items-center shadow-sm d-none d-md-block" style={{ fontSize: '0.8rem' }}>
-                                            加入購物車
-                                        </button>
-                                        <button className="btn bg-primary text-white btn-sm rounded-circle px-2 py-2 d-flex align-items-center shadow-sm d-block d-md-none" style={{ fontSize: '0.8rem' }}>
-                                        <ShoppingCart size={20} className="" />
-                                        </button>
-                                    </div>
+                <div className="carousel-inner">
+                    {slides.map((slideProducts, slideIndex) => (
+                        <div 
+                        key={slideIndex} 
+                        className={`carousel-item ${slideIndex === activeIndex ? 'active' : ''}`}
+                        >
+                            
+                            <div className="grid-container-wrapper"> 
+                                {/* Grid 結構: g-0 (No Gutters) */}
+                                <div className="row g-0">
+                                    {slideProducts.map((product) => (
+                                    /* 響應式設定: 
+                                        col-12: 手機單欄 (每頁6個 = 6行)
+                                        col-md-6: 電腦雙欄 (每頁6個 = 3行) 
+                                    */
+                                        <div key={product.id} className="col-12 col-md-6">
+                                            <div className="grid-card product-card">
+                                                <div className="row g-0">
+                                                    <div className="col-6">
+                                                        <div className="card-img-wrapper">
+                                                            <img 
+                                                            src={`${import.meta.env.BASE_URL}${product.image}`} 
+                                                            className="card-img-top" 
+                                                            alt={product.title} 
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                            
+                                                    <div className="col-6 d-flex flex-column flex-grow-1">
+                                                        <div className="card-body d-flex flex-column p-3">                              
+                                                            <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{product.title}</h6>
+                                                            
+                                                            <div className="d-flex justify-content-between flex-column align-items-start mt-auto pt-2 border-top">
+                                                                <span className="text-primary-950 fs-4 mb-2">NT${product.price}<del className='text-gray-300 fs-6 fs-md-5'>${product.origin_price}</del></span>
+                                                                <button className="btn bg-primary text-white fw-bold btn-sm rounded-pill w-100 py-3 d-flex align-items-center shadow-sm d-none d-md-block" style={{ fontSize: '0.8rem' }}>
+                                                                    加入購物車
+                                                                </button>
+                                                                <button className="btn bg-primary text-white btn-sm rounded-circle px-2 py-2 d-flex align-items-center shadow-sm d-block d-md-none" style={{ fontSize: '0.8rem' }}>
+                                                                <ShoppingCart size={20} className="" />
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
                     ))}
-                        </div>
-                    </div>
                 </div>
-              ))}
-            </div>
 
-            {/* Pagination Dots (Bootstrap Indicators) */}
-            <div className="carousel-indicators">
-                {slides.map((_, index) => (
-                    <button
-                    key={index}
-                    type="button"
-                    onClick={() => goToSlide(index)}
-                    className={index === activeIndex ? "active" : ""}
-                    aria-current={index === activeIndex ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                    ></button>
-                ))}
+                {/* Pagination Dots (Bootstrap Indicators) */}
+                <div className="carousel-indicators">
+                    {slides.map((_, index) => (
+                        <button
+                        key={index}
+                        type="button"
+                        onClick={() => goToSlide(index)}
+                        className={index === activeIndex ? "active" : ""}
+                        aria-current={index === activeIndex ? "true" : "false"}
+                        aria-label={`Slide ${index + 1}`}
+                        ></button>
+                    ))}
+                </div>               
             </div>
-                
-          </div>
         </div>
-      </div>
-    // </div>
+    </div>
   );
 };
 //精選推薦區-網格卡片輪播元件
@@ -418,42 +456,92 @@ const CardCarousel = () => {
 
 
 export default function Home() {
+
+    const [showMenu, setShowMenu] = useState(false);
+
     return (
         <>
-            {/* menu 商品類別選單 */}
+            {/* Menu 商品類別選單 */}
             <div className="container category-container">
                 <div className="container-fluid px-0">
-                    <ul className="d-flex flex-nowrap overflow-auto hide-scrollbar justify-content-between align-items-center p-0 mb-0 list-unstyled">
-                        <li className="nav-item dropdown">
-                            <div className="btn-group">
-                                <button type="button" className="btn border-primary border-1 rounded-1 my-1 me-1 text-primary fw-bold category-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                    所有類別
-                                </button>
-                                <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Action</a></li>
-                                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                                    <li><a className="dropdown-item" href="#">Something else here</a></li>
-                                    <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Separated link</a></li>
-                                </ul>
+                    <div className="d-flex justify-content-around align-items-center p-0 mb-0">
+                        <div className="btn-group position-relative">
+                            <button
+                                onClick={() => setShowMenu(!showMenu)}
+                                type="button"
+                                className="btn border-primary border-1 rounded-1 my-1 me-1 text-primary fw-bold category-link dropdown-btn-hover"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                所有類別
+                            </button>
+
+
+                            {/* Dropdown Menu下拉選單 - Desktop/Tablet */}
+                            <ul className="dropdown-menu rounded-1 py-7 px-4 p-md-2">
+                                {categories.map((cat) => (
+                                    <li key={cat.id} className='py-3 rounded-1'>
+                                        <a className="dropdown-item text-primary fw-bold" href="#">{cat.category}</a>                                      
+                                    </li>
+                                ))}
+                            </ul>
+
+
+                            {/* Overlay 背景遮罩*/}
+                            {showMenu && (
+                                <div 
+                                    className="position-fixed top-0 start-0 w-100 h-100 d-block d-md-none"
+                                style={{ 
+                                    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+                                    zIndex: 1040 
+                                }}
+                                onClick={() => setShowMenu(false)}
+                                />
+                            )}
+
+                            {/* Sidebar 固定側邊選單 - Mobile */}
+                            <div 
+                                className={`menu-container bg-white d-md-none ${showMenu ? 'd-block' : 'd-none'}`}
+                                style={{ 
+                                zIndex: 1050,
+                                boxShadow: '2px 2px 10px rgba(0,0,0,0.1)',
+                                overflowY: 'auto'
+                                }}
+                            >
+                                <div className="p-3">
+                                    {categories.map((cat) => (
+                                        <div key={cat.id}>
+                                            <button 
+                                                className="btn btn-link text-decoration-none w-100 text-start text-primary fw-bold d-flex justify-content-between align-items-center py-3 px-0 sidebar-hover"
+                                            >
+                                                {cat.category}
+                                                <span><ChevronRight size={24} /></span>
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">生活用品</a></li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">食品飲料</a></li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">美妝保養</a></li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">數位家電</a></li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">嬰幼兒</a></li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">寵物</a></li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">室內居家</a></li>
-                        <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">品牌服飾</a></li>
-                    </ul>   
+                        </div>
+
+                        
+                        <ul className='d-flex flex-nowrap overflow-scroll hide-scrollbar justify-content-between align-items-center p-0 mb-0 list-unstyled'>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">生活用品</a></li>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">食品飲料</a></li>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">美妝保養</a></li>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">數位家電</a></li>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">嬰幼兒</a></li>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">寵物</a></li>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">室內居家</a></li>
+                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">品牌服飾</a></li>
+                        </ul>                       
+                    </div>   
                 </div>          
             </div>
             {/* 關鍵class:
             d-flex: 讓子元素橫向排列
             flex-nowrap: 禁止換行，強制在同一行
             overflow-auto: 當內容溢出時顯示滾動機制
-            hide-scrollbar: 我們自定義的 CSS class，用來隱藏 X 軸
+            hide-scrollbar: 自定義的 CSS class，用來隱藏 X 軸
             */}
 
 
@@ -463,7 +551,7 @@ export default function Home() {
                 <HeroSwiper />
             </section>
 
-            {/* flash sale 限時搶購 */}
+            {/* Flash sale 限時搶購 */}
             <section className="flash-sale bg-primary-900 p-0">
                 <div className="container py-7 py-md-120">
                     <h4 className="text-primary-200 fw-bold fs-4 mb-3">HURRY UP !</h4>
@@ -478,7 +566,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* best-sellers 熱銷商品 & member-only會員專屬優惠 */}
+            {/* Best-sellers 熱銷商品 & member-only會員專屬優惠 */}
             <section className="bg-white p-0">
                 <div className="container py-120">
                     <div className="row">

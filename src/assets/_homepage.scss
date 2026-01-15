@@ -31,6 +31,112 @@
 }
 
 
+
+/* 所有類別下拉選單 */
+.dropdown-menu {
+    width: 178px; 
+}
+
+.dropdown-menu li {
+    &:hover {
+        background: $blue-50;
+        cursor: pointer;
+    }
+}
+
+.dropdown-item {
+    &:hover {
+        background-color: transparent;
+        cursor: pointer;
+    }
+}
+
+.dropdown-btn-hover {
+    &:hover {
+        background-color: $primary;
+        color: $white !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        display: none;
+    }
+
+    .dropdown-menu ul li {
+        border-bottom: 1px $primary solid;
+    }
+}
+
+
+.position-relative {
+    position: relative;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.start-0 {
+    left: 0;
+}
+
+.bottom-0 {
+    bottom: 0;
+}
+
+.start-50 {
+    left: 50%;
+}
+
+.sidebar-hover {
+    &:hover {
+        background-color: $blue-50;
+        cursor: pointer;
+    }
+}
+
+.menu-container {
+    display: none;
+}
+
+@media (min-width: 768px) {
+/* Tablet: Dropdown menu */
+    .menu-container {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 1rem;
+        width: 252px;
+        max-height: 500px;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+    } 
+}
+
+@media (max-width: 767px) {
+    /* Mobile: Fixed sidebar */
+    .menu-container {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 252px;
+        height: 100%;
+    }
+}
+
+
+
+/*商品卡片*/
 .card {
     width: 100%;
 }
