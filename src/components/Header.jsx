@@ -136,9 +136,6 @@ const SearchBarMobile = () => {
 export default function NavBar() {
     return (
       <>
-        {/* 回到頂層錨點 */}
-        <a id="nav-top"></a>
-
         {/* 導覽列 */}
         <nav className="navbar navbar-expand-lg navbar-light bg-white px-0 pb-0 mt-4 mb-2">
           <div className="container">

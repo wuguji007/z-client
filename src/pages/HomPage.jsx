@@ -226,229 +226,306 @@ const GreyCardSwiper = () => {
 const products = cardSwiperData;
 
 const CardCarousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(0);
+    
+    // 拖曳/滑動相關 State (整合滑鼠與觸控)
+    const [dragStartX, setDragStartX] = useState(null);
+    const [dragEndX, setDragEndX] = useState(null);
+    const [isDragging, setIsDragging] = useState(false);
+
+    // 觸發滑動的最小距離 (px)
+    const minSwipeDistance = 50; 
   
-  // 每頁顯示 6 張卡片 (2欄 x 3行)
-  const itemsPerSlide = 6;
-  
-  // 將產品分組 (Chunks)
-  const slides = [];
-  for (let i = 0; i < products.length; i += itemsPerSlide) {
+    // 每頁顯示 6 張卡片 (2欄 x 3行)
+    const itemsPerSlide = 6;
+
+    // 將產品分組(Chunks) 
+    const slides = [];
+    for (let i = 0; i < products.length; i += itemsPerSlide) {
     slides.push(products.slice(i, i + itemsPerSlide));
-  }
+    }
 
-  const nextSlide = () => {
+    const nextSlide = () => {
     setActiveIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
+    };
 
-  const prevSlide = () => {
+    const prevSlide = () => {
     setActiveIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
+    };
 
-  const goToSlide = (index) => {
+    const goToSlide = (index) => {
     setActiveIndex(index);
-  };
+    };
 
-  return (
-    <div className="d-flex flex-column">
-      
-        <style>{`
-        /* 覆蓋 Bootstrap Carousel 預設樣式 */
-        .carousel-item {
-          transition: transform 0.6s ease-in-out;
+
+    // --- 通用滑動處理邏輯 ---
+  
+    const handleDragStart = (clientX) => {
+        setDragEndX(null);
+        setDragStartX(clientX);
+        setIsDragging(true);
+    };
+
+    const handleDragMove = (clientX) => {
+        if (isDragging) {
+            setDragEndX(clientX);
+        }
+    };
+
+    const handleDragEnd = () => {
+        if (!dragStartX || !dragEndX) {
+            setIsDragging(false);
+            return;
         }
         
-        /* 導航按鈕樣式 */
-        .nav-btn {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 10;
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          border: 1px solid #eee;
-          background: white;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-        .nav-btn:hover {
-          background: #2c3e50;
-          border-color: $primary; //#2c3e50;
-        }
-        .nav-btn:hover svg {
-          stroke: white;
-        }
-        .nav-prev { left: -24px; }
-        .nav-next { right: -24px; }
-        
-        @media (max-width: 768px) {
-        .nav-btn { display: none; }
-        }
+        const distance = dragStartX - dragEndX;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
 
-        /* 產品卡片樣式 - 配合 g-0 進行微調 */
-        .product-card {
-          border-radius: 0; /* 內部卡片維持直角 */
-          overflow: hidden;
+        if (isLeftSwipe) {
+            nextSlide();
+        }
+        if (isRightSwipe) {
+            prevSlide();
         }
         
-        .btn-add-cart {
-          background-color: #2c3e50;
-          border: none;
-        }
-        .btn-add-cart:hover {
-          background-color: #1a252f;
-        }
+        // 重置狀態
+        setIsDragging(false);
+        setDragStartX(null);
+        setDragEndX(null);
+    };
 
+    // --- 觸控事件 ---
+    const onTouchStart = (e) => handleDragStart(e.targetTouches[0].clientX);
+    const onTouchMove = (e) => handleDragMove(e.targetTouches[0].clientX);
+    const onTouchEnd = () => handleDragEnd();
 
-        /* 分頁圓點 (Indicators) 自定義 */
-        .carousel-indicators {
-          position: static; /* 移出圖片區域 */
-          margin-top: 10px;
-          margin-bottom: 0;
-        }
+    // --- 滑鼠事件 ---
+    const onMouseDown = (e) => {
+        e.preventDefault(); // 防止預設拖曳圖片行為
+        handleDragStart(e.clientX);
+    };
+    const onMouseMove = (e) => {
+        if (isDragging) e.preventDefault();
+        handleDragMove(e.clientX);
+    };
+    const onMouseUp = () => handleDragEnd();
+    const onMouseLeave = () => {
+        if (isDragging) handleDragEnd(); // 滑鼠離開區域視為結束拖曳
+    };
 
-        /* 修正選擇器與圓點樣式 */
-        .carousel-indicators button {
-          background-color: #EFFAFC; /* Inactive: #EFFAFC背景色 */
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          border: 1px #1F749B solid;
-          margin: 0 6px;
-          padding: 0 0;
-          transition: all 0.3s ease;
-          opacity: 1; /* 確保顏色不被 Bootstrap 預設的 opacity 覆蓋 */
-        }
-        
-        .carousel-indicators button.active {
-          background-color: #1F749B; /* Active: 深色填滿 */
-          width: 12px; /* 保持圓形，不拉長 */
-        }
-
-
-      /* Grid 容器外框 */
-        .grid-container-wrapper {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        border-radius: 16px;       /* 容器圓角 */
-        overflow: hidden;          /* 裁切內部卡片的直角 */
-        border: 1px solid #dee2e6; /* 最外層邊框 */
-        background-color: #dee2e6; /* 避免邊框間隙透出背景 */
-      }
-
-
-      /* Grid Card 自定義樣式 */
-      .grid-card {
-        border: 1px solid #dee2e6;
-        border-radius: 0; /* 內部卡片維持直角 */
-        transition: all 0.3s ease;
-        height: 100%;
-        background: white;
-        
-        /* 負 Margin 技巧：讓卡片邊框重疊，形成單線格線效果 */
-        margin-bottom: -1px; 
-        margin-right: -1px;
-      }
-      `}</style>
-
-        <div className="position-relative px-0 px-md-4">
-          
-            {/* 輪播主體 */}
-            <div id="productGridCarousel" className="carousel slide">
+    return (
+        <div className="d-flex flex-column">
             
-                {/* 左右導航按鈕 (Lucide Icons) */}
-                <button 
-                className="nav-btn nav-prev" 
-                onClick={prevSlide}
-                aria-label="Previous Slide"
-                >
-                <ChevronLeft size={24} color="#333" />
-                </button>
-                <button 
-                className="nav-btn nav-next" 
-                onClick={nextSlide}
-                aria-label="Next Slide"
-                >
-                <ChevronRight size={24} color="#333" />
-                </button>
+            <style>{`
+            /* 覆蓋 Bootstrap Carousel 預設樣式 */
+            .carousel-item {
+                transition: transform 0.6s ease-in-out;
+            }
+            
+            /* 導航按鈕樣式 */
+            .nav-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 10;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                border: 1px solid #eee;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            .nav-btn:hover {
+                background: #2c3e50;
+                border-color: $primary; //#2c3e50;
+            }
+            .nav-btn:hover svg {
+                stroke: white;
+            }
+            .nav-prev { left: -24px; }
+            .nav-next { right: -24px; }
+            
+            @media (max-width: 768px) {
+            .nav-btn { display: none; }
+            }
 
-                  
-                <div className="carousel-inner">
-                    {slides.map((slideProducts, slideIndex) => (
-                        <div 
-                        key={slideIndex} 
-                        className={`carousel-item ${slideIndex === activeIndex ? 'active' : ''}`}
-                        >
-                            
-                            <div className="grid-container-wrapper"> 
-                                {/* Grid 結構: g-0 (No Gutters) */}
-                                <div className="row g-0">
-                                    {slideProducts.map((product) => (
-                                    /* 響應式設定: 
-                                        col-12: 手機單欄 (每頁6個 = 6行)
-                                        col-md-6: 電腦雙欄 (每頁6個 = 3行) 
-                                    */
-                                        <div key={product.id} className="col-12 col-md-6">
-                                            <div className="grid-card product-card">
-                                                <div className="row g-0">
-                                                    <div className="col-6">
-                                                        <div className="card-img-wrapper">
-                                                            <img 
-                                                            src={`${import.meta.env.BASE_URL}${product.image}`} 
-                                                            className="card-img-top" 
-                                                            alt={product.title} 
-                                                            />
+            /* 產品卡片樣式 - 配合 g-0 進行微調 */
+            .product-card {
+                border-radius: 0; /* 內部卡片維持直角 */
+                overflow: hidden;
+            }
+            
+            .btn-add-cart {
+                background-color: #2c3e50;
+                border: none;
+            }
+            .btn-add-cart:hover {
+                background-color: #1a252f;
+            }
+
+
+            /* 分頁圓點 (Indicators) 自定義 */
+            .carousel-indicators {
+                position: static; /* 移出圖片區域 */
+                margin-top: 10px;
+                margin-bottom: 0;
+            }
+
+            /* 修正選擇器與圓點樣式 */
+            .carousel-indicators button {
+                background-color: #EFFAFC; /* Inactive: #EFFAFC背景色 */
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                border: 1px #1F749B solid;
+                margin: 0 6px;
+                padding: 0 0;
+                transition: all 0.3s ease;
+                opacity: 1; /* 確保顏色不被 Bootstrap 預設的 opacity 覆蓋 */
+            }
+            
+            .carousel-indicators button.active {
+                background-color: #1F749B; /* Active: 深色填滿 */
+                width: 12px; /* 保持圓形，不拉長 */
+            }
+
+            /* Grid 容器外框 */
+            .grid-container-wrapper {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                border-radius: 16px;       /* 容器圓角 */
+                overflow: hidden;          /* 裁切內部卡片的直角 */
+                border: 1px solid #dee2e6; /* 最外層邊框 */
+                background-color: #dee2e6; /* 避免邊框間隙透出背景 */
+            }
+
+
+            /* Grid Card 自定義樣式 */
+            .grid-card {
+                border: 1px solid #dee2e6;
+                border-radius: 0; /* 內部卡片維持直角 */
+                transition: all 0.3s ease;
+                height: 100%;
+                background: white;
+            
+                /* 負 Margin 技巧：讓卡片邊框重疊，形成單線格線效果 */
+                margin-bottom: -1px; 
+                margin-right: -1px;
+            }
+            `}</style>
+
+            <div className="position-relative px-0 px-md-4">
+                
+                {/* 輪播主體 */}
+                <div
+                    id="productGridCarousel"
+                    className="carousel-slide"
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
+                    onMouseDown={onMouseDown}
+                    onMouseMove={onMouseMove}
+                    onMouseUp={onMouseUp}
+                    onMouseLeave={onMouseLeave}
+                >
+                
+                    {/* 左右導航按鈕 (Lucide Icons) */}
+                    <button 
+                    className="nav-btn nav-prev" 
+                    onClick={prevSlide}
+                    aria-label="Previous Slide"
+                    >
+                    <ChevronLeft size={24} color="#333" />
+                    </button>
+                    <button 
+                    className="nav-btn nav-next" 
+                    onClick={nextSlide}
+                    aria-label="Next Slide"
+                    >
+                    <ChevronRight size={24} color="#333" />
+                    </button>
+
+                        
+                    <div className="carousel-inner">
+                        {slides.map((slideProducts, slideIndex) => (
+                            <div 
+                            key={slideIndex} 
+                            className={`carousel-item ${slideIndex === activeIndex ? 'active' : ''}`}
+                            >
+                                
+                                <div className="grid-container-wrapper"> 
+                                    {/* Grid 結構: g-0 (No Gutters) */}
+                                    <div className="row g-0">
+                                        {slideProducts.map((product) => (
+                                        /* 響應式設定: 
+                                            col-12: 手機單欄 (每頁6個 = 6行)
+                                            col-md-6: 電腦雙欄 (每頁6個 = 3行) 
+                                        */
+                                            <div key={product.id} className="col-12 col-md-6">
+                                                <div className="grid-card product-card">
+                                                    <div className="row g-0">
+                                                        <div className="col-6">
+                                                            <div className="card-img-wrapper">
+                                                                <img 
+                                                                src={`${import.meta.env.BASE_URL}${product.image}`} 
+                                                                className="card-img-top" 
+                                                                alt={product.title} 
+                                                                />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                            
-                                                    <div className="col-6 d-flex flex-column flex-grow-1">
-                                                        <div className="card-body d-flex flex-column p-3">                              
-                                                            <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{product.title}</h6>
-                                                            
-                                                            <div className="d-flex justify-content-between flex-column align-items-start mt-auto pt-2 border-top">
-                                                                <span className="text-primary-950 fs-4 mb-2">NT${product.price}<del className='text-gray-300 fs-6 fs-md-5'>${product.origin_price}</del></span>
-                                                                <button className="btn bg-primary text-white fw-bold btn-sm rounded-pill w-100 py-3 d-flex align-items-center shadow-sm d-none d-md-block" style={{ fontSize: '0.8rem' }}>
-                                                                    加入購物車
-                                                                </button>
-                                                                <button className="btn bg-primary text-white btn-sm rounded-circle px-2 py-2 d-flex align-items-center shadow-sm d-block d-md-none" style={{ fontSize: '0.8rem' }}>
-                                                                <ShoppingCart size={20} className="" />
-                                                                </button>
+                                                                
+                                                        <div className="col-6 d-flex flex-column flex-grow-1">
+                                                            <div className="card-body d-flex flex-column p-3">                              
+                                                                <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{product.title}</h6>
+                                                                
+                                                                <div className="d-flex justify-content-between align-items-end align-items-md-start flex-column align-items-start mt-auto pt-2 border-top">
+                                                                    <div className="d-flex flex-column align-items-end align-items-md-start">
+                                                                        <span className="text-primary-950 fs-4">NT${product.price}</span>
+                                                                        <del className='text-gray-300 fs-6 fs-md-5 mb-2'>${product.origin_price}</del>
+                                                                    </div>
+                                                                    <button className="btn bg-primary text-white fw-bold btn-sm rounded-pill w-100 py-3 d-flex align-items-center shadow-sm d-none d-md-block" style={{ fontSize: '0.8rem' }}>
+                                                                        加入購物車
+                                                                    </button>
+                                                                    <button className="btn bg-primary text-white btn-sm rounded-circle px-2 py-2 d-flex align-items-center shadow-sm d-block d-md-none" style={{ fontSize: '0.8rem' }}>
+                                                                    <ShoppingCart size={20} className="" />
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
 
-                {/* Pagination Dots (Bootstrap Indicators) */}
-                <div className="carousel-indicators">
-                    {slides.map((_, index) => (
-                        <button
-                        key={index}
-                        type="button"
-                        onClick={() => goToSlide(index)}
-                        className={index === activeIndex ? "active" : ""}
-                        aria-current={index === activeIndex ? "true" : "false"}
-                        aria-label={`Slide ${index + 1}`}
-                        ></button>
-                    ))}
-                </div>               
+                    {/* Pagination Dots (Bootstrap Indicators) */}
+                    <div className="carousel-indicators">
+                        {slides.map((_, index) => (
+                            <button
+                            key={index}
+                            type="button"
+                            onClick={() => goToSlide(index)}
+                            className={index === activeIndex ? "active" : ""}
+                            aria-current={index === activeIndex ? "true" : "false"}
+                            aria-label={`Slide ${index + 1}`}
+                            ></button>
+                        ))}
+                    </div>               
+                </div>
             </div>
         </div>
-    </div>
-  );
+    );
 };
 //精選推薦區-網格卡片輪播元件
 
@@ -461,6 +538,9 @@ export default function Home() {
 
     return (
         <>
+            {/* 回到頂層錨點 */}
+            <a id="nav-top"></a>
+
             {/* Menu 商品類別選單 */}
             <div className="container category-container">
                 <div className="container-fluid px-0">

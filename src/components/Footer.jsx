@@ -38,8 +38,8 @@ export default function Footer() {
             </div>
 
             <button className="btn rounded-circle back-to-top-btn border-none">
-                <a href="#nav-top" className="back-to-top"><ArrowUp size={40} /></a>
-                </button>
+                <a href="#nav-top" className="back-to-top"><ArrowUp size={40} /></a>              
+            </button>           
         </div>
     )
 }
