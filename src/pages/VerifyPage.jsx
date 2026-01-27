@@ -47,7 +47,7 @@ export default function Verify({email}) {
         setIsLoading(true);
 
         try {
-            await axiosClient.post('/verify', { email: userEmail, code: code });
+            await axiosClient.post('/api/verify', { email: userEmail, code: code });
             console.log('驗證成功，請前往登入')
             setTimeout(() => navigate('/login'), 1500);
             
@@ -64,7 +64,7 @@ export default function Verify({email}) {
         setSuccessMsg('');
 
         try {
-            await axiosClient.post('/resend-verificaiton', { email: userEmail });
+            await axiosClient.post('/api/resend-verificaiton', { email: userEmail });
             setSuccessMsg('驗證碼已重新寄出，請查收信箱');
             console.log(successMsg);
             setResendCooldown(60); // 設定 60 秒冷卻時間

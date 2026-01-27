@@ -30,7 +30,7 @@ export default function Login({ setToken, setUser }) {
 
     const handleEmailBlur = async () => {
         try {
-            const res = await axiosClient.post('/check-email', { email: formData.email });
+            const res = await axiosClient.post('/api/check-email', { email: formData.email });
             if (!res.data.exists) {
                 setEmailCheck({ error: true, message: '此帳號尚未註冊' });
             } else {
@@ -59,7 +59,7 @@ export default function Login({ setToken, setUser }) {
         }       
 
         try {
-            const res = await axiosClient.post('/login', {email: formData.email, password: formData.password});
+            const res = await axiosClient.post('/api/login', {email: formData.email, password: formData.password});
             const { accessToken, user } = res.data;
 
             if (!user.isVerified) {

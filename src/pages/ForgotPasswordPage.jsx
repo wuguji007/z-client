@@ -15,7 +15,7 @@ export default function ForgotPassword() {
         setIsLoading(true);
 
         try {
-            await axiosClient.post('/forgot-password', { email });
+            await axiosClient.post('/api/forgot-password', { email });
             console.log('重設驗證碼已寄出');
 
             setTimeout(() => {
