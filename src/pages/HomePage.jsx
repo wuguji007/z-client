@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from "react-router-dom"
-import HeroSwiper from "../components/HeroSwiper.jsx"
-import { getImageUrl } from "../utils/imageHelper.js"
+import { Link, useNavigate } from "react-router-dom";
+import HeroSwiper from "../components/HeroSwiper.jsx";
+import BackToTop from '../components/BackToTop.jsx';
+import { getImageUrl } from "../utils/imageHelper.js";
 import { ChevronLeft, ChevronRight, ShoppingCart, Cat, CookingPot } from 'lucide-react';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Grid } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -145,34 +146,38 @@ const cardSwiperData = [
     }
 ];
 
-
+ 
 const CardSwiper = () => {
     return (
         <>
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 pe-0 px-md-4">
                     <Swiper
                         slidesPerView={1.3}
-                        spaceBetween={12}
+                        spaceBetween={6}
                         modules={[Navigation]}
                         navigation={true} 
                         loop={true}
                         breakpoints={{
-                        378: { slidesPerView: 1.3, spaceBetween: 12 },
-                        576: { slidesPerView: 2.2, spaceBetween: 12 },
-                        768: { slidesPerView: 3, spaceBetween: 20 },
-                        1024: { slidesPerView: 4, spaceBetween: 24 }
+                        378: { slidesPerView: 1.3, spaceBetween: 6 },
+                        576: { slidesPerView: 2.2, spaceBetween: 6 },
+                        768: { slidesPerView: 3, spaceBetween: 12 },
+                        1024: { slidesPerView: 4, spaceBetween: 12 }
                         }}
                     >
                         {cardSwiperData.map((card) => (
                         <SwiperSlide key={card.id} className="swiper-slide">
-                            <div className="card h-auto border-0 p-3 p-md-5">
+                            <div className="card product-card d-flex flex-column justify-content-between h-auto rounded-4 p-3 p-md-5">
                                 <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} />
-                                <div className="card-body p-0 mb-4">
-                                    <h5 className="card-title fw-bold fs-5 text-primary-950 mb-20">{card.title}</h5>
-                                    <p className="card-text fs-5 text-primary-950">NT${card.price} <del className="text-gray-300 fs-6 fw-normal">NT${card.origin_price}</del></p>
-                                </div>
-                                <button className="btn btn-primary fw-bold py-4 rounded-pill w-100">加入購物車</button>
+                                <div className="d-flex flex-column justify-content-between h-100">
+                                    <div className="card-body p-0 mb-4">
+                                        <h5 className="card-title fw-bold text-primary-950">{card.title}</h5>                                    
+                                    </div>
+                                    <div className="product-card-footer">
+                                        <p className="card-text text-primary-950">NT${card.price} <del className="text-gray-300 fs-6 fw-normal">NT${card.origin_price}</del></p>
+                                        <button className="btn btn-primary fw-bold py-4 rounded-pill w-100">加入購物車</button>
+                                    </div>
+                                </div>                                   
                             </div>                  
                         </SwiperSlide>
                         ))}
@@ -188,35 +193,38 @@ const GreyCardSwiper = () => {
     return (
         <>
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 pe-0 px-md-4">
                     <Swiper
                         slidesPerView={1.3}
-                        spaceBetween={12}
+                        spaceBetween={6}
                         modules={[Navigation]}
                         navigation={true} 
                         loop={true}
                         breakpoints={{
-                        576: { slidesPerView: 2.2, spaceBetween: 12 },
-                        768: { slidesPerView: 3, spaceBetween: 20 },
-                        1024: { slidesPerView: 4, spaceBetween: 24 }
+                        576: { slidesPerView: 2.2, spaceBetween: 6 },
+                        768: { slidesPerView: 3, spaceBetween: 12 },
+                        1024: { slidesPerView: 4, spaceBetween: 12 }
                         }}
                     >
                         {cardSwiperData.map((card) => (
                         <SwiperSlide key={card.id} className="swiper-slide">
-                            <div className="card bg-gray-50 h-auto border-0 p-3 p-md-5">
+                            <div className="card product-card-gray d-flex flex-column justify-content-between h-auto rounded-4 border-0 p-3 p-md-5">
                                 <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} />
-                                <div className="card-body p-0 mb-4">
-                                    <h5 className="card-title fw-bold fs-5 text-primary-950">{card.title}</h5>
-                                    <p className="card-text fs-5 fs-md-4 text-primary-950">NT${card.price} <del className="text-gray-300 fs-5 fw-normal">NT${card.origin_price}</del></p>
+                                <div className="d-flex flex-column justify-content-between h-100">
+                                    <div className="card-body p-0 mb-4">
+                                        <h5 className="card-title fw-bold text-primary-950">{card.title}</h5>
+                                    </div>
+                                    <div className="product-card-footer">
+                                        <p className="card-text text-primary-950">NT${card.price} <del className="text-gray-300 fs-5 fw-normal">NT${card.origin_price}</del></p>
+                                        <button className="card-btn btn btn-primary fw-bold py-3 py-md-4 rounded-pill w-100">加入購物車</button>                                            
+                                    </div>                                            
                                 </div>
-                                <button className="card-btn btn btn-primary fw-bold py-3 py-md-4 rounded-pill w-100">加入購物車</button>
                             </div>
                         </SwiperSlide>
                         ))}
                     </Swiper> 
                 </div>
-            </div>
-             
+            </div>             
         </>
     )
 }
@@ -316,112 +324,7 @@ const CardCarousel = () => {
 
     return (
         <div className="d-flex flex-column">
-            
-            <style>{`
-            /* 覆蓋 Bootstrap Carousel 預設樣式 */
-            .carousel-item {
-                transition: transform 0.6s ease-in-out;
-            }
-            
-            /* 導航按鈕樣式 */
-            .nav-btn {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: 10;
-                width: 48px;
-                height: 48px;
-                border-radius: 50%;
-                border: 1px solid #eee;
-                background: white;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            .nav-btn:hover {
-                background: #2c3e50;
-                border-color: $primary; //#2c3e50;
-            }
-            .nav-btn:hover svg {
-                stroke: white;
-            }
-            .nav-prev { left: -24px; }
-            .nav-next { right: -24px; }
-            
-            @media (max-width: 768px) {
-            .nav-btn { display: none; }
-            }
-
-            /* 產品卡片樣式 - 配合 g-0 進行微調 */
-            .product-card {
-                border-radius: 0; /* 內部卡片維持直角 */
-                overflow: hidden;
-            }
-            
-            .btn-add-cart {
-                background-color: #2c3e50;
-                border: none;
-            }
-            .btn-add-cart:hover {
-                background-color: #1a252f;
-            }
-
-
-            /* 分頁圓點 (Indicators) 自定義 */
-            .carousel-indicators {
-                position: static; /* 移出圖片區域 */
-                margin-top: 10px;
-                margin-bottom: 0;
-            }
-
-            /* 修正選擇器與圓點樣式 */
-            .carousel-indicators button {
-                background-color: #EFFAFC; /* Inactive: #EFFAFC背景色 */
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                border: 1px #1F749B solid;
-                margin: 0 6px;
-                padding: 0 0;
-                transition: all 0.3s ease;
-                opacity: 1; /* 確保顏色不被 Bootstrap 預設的 opacity 覆蓋 */
-            }
-            
-            .carousel-indicators button.active {
-                background-color: #1F749B; /* Active: 深色填滿 */
-                width: 12px; /* 保持圓形，不拉長 */
-            }
-
-            /* Grid 容器外框 */
-            .grid-container-wrapper {
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                border-radius: 16px;       /* 容器圓角 */
-                overflow: hidden;          /* 裁切內部卡片的直角 */
-                border: 1px solid #dee2e6; /* 最外層邊框 */
-                background-color: #dee2e6; /* 避免邊框間隙透出背景 */
-            }
-
-
-            /* Grid Card 自定義樣式 */
-            .grid-card {
-                border: 1px solid #dee2e6;
-                border-radius: 0; /* 內部卡片維持直角 */
-                transition: all 0.3s ease;
-                height: 100%;
-                background: white;
-            
-                /* 負 Margin 技巧：讓卡片邊框重疊，形成單線格線效果 */
-                margin-bottom: -1px; 
-                margin-right: -1px;
-            }
-            `}</style>
-
-            <div className="position-relative px-0 px-md-4">
+            <div className="position-relative px-2">
                 
                 {/* 輪播主體 */}
                 <div
@@ -451,8 +354,7 @@ const CardCarousel = () => {
                     >
                     <ChevronRight size={24} color="#333" />
                     </button>
-
-                        
+                       
                     <div className="carousel-inner">
                         {slides.map((slideProducts, slideIndex) => (
                             <div 
@@ -481,21 +383,21 @@ const CardCarousel = () => {
                                                             </div>
                                                         </div>
                                                                 
-                                                        <div className="col-6 d-flex flex-column flex-grow-1">
+                                                        <div className="col-6 d-flex flex-column">
                                                             <div className="card-body d-flex flex-column p-3">                              
-                                                                <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{product.title}</h6>
+                                                                <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{product.title}</h6 >
                                                                 
-                                                                <div className="d-flex justify-content-between align-items-end align-items-md-start flex-column align-items-start mt-auto pt-2 border-top">
-                                                                    <div className="d-flex flex-column align-items-end align-items-md-start">
-                                                                        <span className="text-primary-950 fs-4">NT${product.price}</span>
+                                                                <div className="d-flex justify-content-between align-items-start align-items-md-start flex-column align-items-start mt-auto pt-2 border-top">
+                                                                    <div className="d-flex flex-column align-items-start align-items-md-start">
+                                                                        <span className="text-primary-950 fw-bold fs-4">NT${product.price}</span>
                                                                         <del className='text-gray-300 fs-6 fs-md-5 mb-2'>${product.origin_price}</del>
                                                                     </div>
-                                                                    <button className="btn bg-primary text-white fw-bold btn-sm rounded-pill w-100 py-3 d-flex align-items-center shadow-sm d-none d-md-block" style={{ fontSize: '0.8rem' }}>
+                                                                    <button className="btn btn-add-cart text-white fw-bold btn-sm rounded-pill w-100 py-3 d-flex align-items-center shadow-sm d-none d-md-block" style={{ fontSize: '0.8rem' }}>
                                                                         加入購物車
                                                                     </button>
-                                                                    <button className="btn bg-primary text-white btn-sm rounded-circle px-2 py-2 d-flex align-items-center shadow-sm d-block d-md-none" style={{ fontSize: '0.8rem' }}>
+                                                                    {/* <button className="btn bg-primary text-white btn-sm rounded-circle px-2 py-2 d-flex align-items-center shadow-sm d-block d-md-none" style={{ fontSize: '0.8rem' }}>
                                                                     <ShoppingCart size={20} className="" />
-                                                                    </button>
+                                                                    </button> */}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -531,9 +433,7 @@ const CardCarousel = () => {
 
 
 
-
 export default function Home() {
-
     const [showMenu, setShowMenu] = useState(false);
 
     return (
@@ -544,19 +444,17 @@ export default function Home() {
             {/* Menu 商品類別選單 */}
             <div className="container category-container">
                 <div className="container-fluid px-0">
-                    <div className="d-flex justify-content-around align-items-center p-0 mb-0">
-                        <div className="btn-group position-relative">
+                    <div className="d-flex justify-content-between align-items-center p-0 mb-0">
+                        <div className="btn-group position-relative me-1">
                             <button
                                 onClick={() => setShowMenu(!showMenu)}
                                 type="button"
-                                className="btn border-primary border-1 rounded-1 my-1 me-1 text-primary fw-bold category-link dropdown-btn-hover"
+                                className="btn border-primary border-1 rounded-1 my-1 text-primary fw-bold category-link dropdown-btn dropdown-btn-hover"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
                                 所有類別
                             </button>
-
-
                             {/* Dropdown Menu下拉選單 - Desktop/Tablet */}
                             <ul className="dropdown-menu rounded-1 py-7 px-4 p-md-2">
                                 {categories.map((cat) => (
@@ -590,7 +488,7 @@ export default function Home() {
                             >
                                 <div className="p-3">
                                     {categories.map((cat) => (
-                                        <div key={cat.id}>
+                                        <div key={cat.id} className='border-bottom border-primary'>
                                             <button 
                                                 className="btn btn-link text-decoration-none w-100 text-start text-primary fw-bold d-flex justify-content-between align-items-center py-3 px-0 sidebar-hover"
                                             >
@@ -603,16 +501,16 @@ export default function Home() {
                             </div>
                         </div>
 
-                        
-                        <ul className='d-flex flex-nowrap overflow-scroll hide-scrollbar justify-content-between align-items-center p-0 mb-0 list-unstyled'>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">生活用品</a></li>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">食品飲料</a></li>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">美妝保養</a></li>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">數位家電</a></li>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">嬰幼兒</a></li>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">寵物</a></li>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">室內居家</a></li>
-                            <li className="category-text-secondary"><a href="#" className="py-3 px-6 category-link">品牌服飾</a></li>
+                        {/* Navbar 類別導覽列 */}
+                        <ul className='d-flex flex-nowrap overflow-scroll hide-scrollbar justify-content-between align-items-center p-0 mb-0 list-unstyled gap-md-8 mx-md-8'>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">生活用品</a></li>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">食品飲料</a></li>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">美妝保養</a></li>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">數位家電</a></li>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">嬰幼兒</a></li>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">寵物</a></li>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">室內居家</a></li>
+                            <li className="category-text-btn"><a href="#" className="py-3 px-4 category-link">品牌服飾</a></li>
                         </ul>                       
                     </div>   
                 </div>          
@@ -625,7 +523,6 @@ export default function Home() {
             */}
 
 
-
             {/* Hero swiper輪播圖 */} 
             <section className="hero">
                 <HeroSwiper />
@@ -634,7 +531,7 @@ export default function Home() {
             {/* Flash sale 限時搶購 */}
             <section className="flash-sale bg-primary-900 p-0">
                 <div className="container py-7 py-md-120">
-                    <h4 className="text-primary-200 fw-bold fs-4 mb-3">HURRY UP !</h4>
+                    <h4 className="text-primary-200 fw-bold sales-pitch mb-1 mb-md-3">HURRY UP !</h4>
                     <div className="d-flex justify-content-between align-items-center mb-7">
                         <h2 className='title-line text-white fw-bold'>限時搶購</h2>
                         {/* Horizontal Line (Flex Grow to fill space) */}
@@ -652,12 +549,12 @@ export default function Home() {
                     <div className="row">
                         <div className="col-12 mb-10">
                             <div className="w-100 mb-8">
-                                <h4 className="text-primary fw-bold fs-4 mb-3">HOT</h4>
+                                <h4 className="text-primary fw-bold sales-pitch mb-1 mb-md-3">HOT</h4>
                                 <div className="d-flex justify-content-between align-items-center mb-7">
-                                    <h2 className="text-black fw-bold bg-white">熱銷商品</h2>
+                                    <h2 className="title-line text-black fw-bold bg-white">熱銷商品</h2>
                                     {/* Horizontal Line (Flex Grow to fill space) */}
                                     <div className="flex-grow-1 mx-4 bg-primary" style={{ height: '1px' }}></div>                                               
-                                    <div><Link to="/member" className="btn btn-border-primary rounded-pill py-4 px-7 fs-5 fw-bold">查看更多</Link>
+                                    <div><Link to="/" className="btn btn-border-primary rounded-pill view-more-btn py-3 px-5 py-md-4 px-md-7 fw-bold">查看更多</Link>
                                     </div>
                                 </div>                   
                                 <div>
@@ -665,12 +562,12 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className="w-100">
-                                <h4 className="text-primary fw-bold fs-4 mb-3">MEMBER ONLY</h4>
+                                <h4 className="text-primary fw-bold sales-pitch mb-1 mb-md-3">MEMBER ONLY</h4>
                                 <div className="d-flex justify-content-between align-items-center mb-7">
-                                    <h2 className="text-black fw-bold bg-white">會員專屬優惠</h2>
+                                    <h2 className="title-line text-black fw-bold bg-white">會員專屬優惠</h2>
                                     {/* Horizontal Line (Flex Grow to fill space) */}
                                     <div className="flex-grow-1 mx-4 bg-primary" style={{ height: '1px' }}></div>                                               
-                                    <div><Link to="/member" className="btn btn-border-primary rounded-pill py-4 px-7 fs-5 fw-bold">查看更多</Link>
+                                    <div><Link to="/" className="btn btn-border-primary rounded-pill view-more-btn py-3 px-5 py-md-4 px-md-7 fw-bold">查看更多</Link>
                                     </div>
                                 </div>                   
                                 <div>
@@ -691,25 +588,29 @@ export default function Home() {
                     <div className='mb-6 mb-md-8'>
                         <div className="bg-white d-flex justify-content-between align-items-center mb-7">
                             <div className='d-flex align-items-center m-0'>
-                                <div className='bg-primary p-4 text-white me-4'>
-                                    <Cat size={52} />
+                                <div className='bg-primary px-2 py-5 p-md-4 text-white me-2 me-md-4'>
+                                    <Cat className='title-icon' />
                                 </div>
-                                <div className="d-flex flex-column-reverse flex-md-row">
-                                    <h2 className='me-3'>寵物用品</h2>
-                                    <div className="badge rounded-pill bg-primary-100 px-4 py-2 text-primary fw-bold fs-20">精選推薦</div>
+                                <div className="d-flex flex-column-reverse align-items-center flex-md-row py-3 py-md-0">
+                                    <h2 className='me-md-3 mb-0'>寵物用品</h2>
+                                    <div className="badge promo-badge rounded-pill bg-primary-100 py-1 px-3 py-md-2 px-md-4 mb-1 mb-md-0 text-primary fw-bold">精選推薦</div>
                                 </div>
                             </div>
-                            <div><Link to="/" className="btn btn-border-primary rounded-pill py-3 px-5 py-md-4 px-md-7 fs-sm fs-md-5 fw-bold me-4">查看更多</Link>
+                            <div><Link to="/" className="btn btn-border-primary rounded-pill view-more-btn py-3 px-5 py-md-4 px-md-7 fw-bold me-4">查看更多</Link>
                             </div>
                         </div>
                                         
-                        <div className="row bg-primar-50 align-items-stretch">
-                            <div className="col-12 col-md-4 px-md-0 h-100">
-                                <div className="border-4 mb-3 mb-md-0 h-100">
-                                <img src={`${import.meta.env.BASE_URL}images/promo-pet.svg`} alt="pet-supplies" className='promo-img'/>
-                                </div>
+                        <div className="row bg-primar-50 d-flex flex-column flex-md-row">
+                            {/* 左側商品宣傳圖 */}
+                            <div className="col-12 col-md-4 border-4 px-md-0 mb-3 mb-md-0">
+                                <img src={`${import.meta.env.BASE_URL}images/promo-pet.svg`} alt="pet-supplies" className='promo-img h-100'/>
                             </div>
-                            {/* 網格卡片輪播 */}
+                            {/* <div className="col-12 col-md-4 px-md-0">
+                                <div className="border-4 mb-3 mb-md-0">
+                                    <img src={`${import.meta.env.BASE_URL}images/promo-pet.svg`} alt="pet-supplies" className='promo-img h-100'/>
+                                </div>
+                            </div> */}
+                            {/* 右側網格卡片輪播 */}
                             <div className="col-12 col-md-8">                           
                                 <CardCarousel />                            
                             </div>                        
@@ -721,23 +622,21 @@ export default function Home() {
                     <div>
                         <div className="bg-white d-flex justify-content-between align-items-center mb-7">
                             <div className='d-flex align-items-center m-0'>
-                                <div className='bg-primary p-4 text-white me-4'>
-                                    <CookingPot size={52} />
+                                <div className='bg-primary px-2 py-5 p-md-4 text-white me-2 me-md-4'>
+                                    <CookingPot className='title-icon' />
                                 </div>
-                                <div className="d-flex flex-column-reverse flex-md-row">
-                                    <h2 className='me-3'>食品飲料</h2>
-                                    <div className="badge rounded-pill bg-primary-100 px-4 py-2 text-primary fw-bold fs-20">精選推薦</div>
+                                <div className="d-flex flex-column-reverse align-items-center flex-md-row py-3 py-md-0">
+                                    <h2 className='me-md-3 mb-0'>食品飲料</h2>
+                                    <div className="badge promo-badge rounded-pill bg-primary-100 py-1 px-3 py-md-2 px-md-4 mb-1 mb-md-0 text-primary fw-bold">精選推薦</div>
                                 </div>
                             </div>
-                            <div><Link to="/" className="btn btn-border-primary rounded-pill py-3 px-5 py-md-4 px-md-7 fs-sm fs-md-5 fw-bold me-4">查看更多</Link>
+                            <div><Link to="/" className="btn btn-border-primary rounded-pill view-more-btn py-3 px-5 py-md-4 px-md-7 fs-sm fs-md-5 fw-bold me-4">查看更多</Link>
                             </div>
                         </div>
                                         
-                        <div className="row bg-primar-50 align-items-stretch">
-                            <div className="col-12 col-md-4 px-md-0 h-100">
-                                <div className="border-4 mb-3 mb-md-0 h-100">
+                        <div className="row bg-primar-50">
+                            <div className="col-12 col-md-4 border-4 px-md-0 mb-3 mb-md-0">
                                 <img src={`${import.meta.env.BASE_URL}images/promo-food.svg`} alt="pet-supplies" className='promo-img'/>
-                                </div>
                             </div>
                             {/* 網格卡片輪播 */}
                             <div className="col-12 col-md-8">                           
@@ -749,6 +648,7 @@ export default function Home() {
                 </div>
             </section>
 
+            <BackToTop />
         </>
     )
 }

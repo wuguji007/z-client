@@ -20,15 +20,26 @@
   }
 }
 
+
 .nav-link {
+    color: $primary;
+    &:hover {
+      color: white;
+      background-color: $primary;     
+    }
+}
+
+
+.nav-link-cart {
     color: $primary;
 
     &:hover {
       color: white;
-      background-color: $primary;
+      background-color: $blue-50;
       
     }
 }
+
 
 .loggin-btn {
   width: 100%;
@@ -60,4 +71,8 @@
   }
 }
 
+
+.btn-check-border:checked {
+  border: none;
+}
 

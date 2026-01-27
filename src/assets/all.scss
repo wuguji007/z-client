@@ -3,8 +3,11 @@
 @import 'bootstrap/scss/bootstrap';
 @import '../assets/header.scss';
 @import '../assets/footer';
-@import '../assets/hero-swiper.scss';
 @import '../assets/homepage.scss';
+@import '../assets/loginpage.scss';
+@import '../assets/registerpage.scss';
+@import '../assets/hero-swiper.scss';
+@import '../assets/back-to-top.scss';
 
 *,
 *::before,
@@ -48,6 +51,7 @@ h1 {
 }
 
 
+
 .container {
   width: 1296px;
   margin: 0 auto;
@@ -87,18 +91,10 @@ h1 {
 }
 
 
-/*帶線條標題*/
-.title-line{
-  font-size: 40px;
-  background-color: $blue-900;
-  z-index: 1;
-  padding-right: 20px;
-}
-
+/*Swiper React 輪播通用樣式*/
 .swiper-container {
   overflow: hidden;
 }
-
 
 /*swiper卡片高度一致*/
 .swiper-slide {
@@ -114,17 +110,13 @@ h1 {
   height: 64px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-  padding: 20px;           
-}
-
-.swiper-navigation-icon {
-  fill: none;
-  stroke: $primary;
-  stroke-width: 1.25;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  border-radius: 100%;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+  padding: 20px;
+  transition: all 0.3s ease-in-out;     
+  &:hover {
+    color: $white;
+    background: $primary;
+  }      
 }
 
 @media (max-width: 768px) {

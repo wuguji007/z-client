@@ -1,5 +1,7 @@
 export default function Cart() {
     return (
-        <div>這是購物車頁面</div>
-  )
+        <>
+            <div className="py-8">這是購物車頁面</div>
+        </>
+    )
 }
