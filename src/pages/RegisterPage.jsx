@@ -57,7 +57,7 @@ export default function Register({setVerificationEmail}) {
         console.log('前端準備發送註冊資料:', formData); 
         try {
             
-            const res = await axiosClient.post('/register', { email: formData.email, password: formData.password, username: formData.username });
+            const res = await axiosClient.post('/api/register', { email: formData.email, password: formData.password, username: formData.username });
             setVerificationEmail(formData.email);
 
             console.log('註冊成功！驗證碼已發送至您的信箱', res.data);

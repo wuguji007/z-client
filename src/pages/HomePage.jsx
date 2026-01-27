@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import HeroSwiper from "../components/HeroSwiper.jsx";
 import BackToTop from '../components/BackToTop.jsx';
 import { getImageUrl } from "../utils/imageHelper.js";
-import { ChevronLeft, ChevronRight, ShoppingCart, Cat, CookingPot } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Cat, CookingPot } from 'lucide-react';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
