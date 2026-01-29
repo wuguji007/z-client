@@ -64,7 +64,7 @@ export default function Verify({email}) {
         setSuccessMsg('');
 
         try {
-            await axiosClient.post('/api/resend-verificaiton', { email: userEmail });
+            await axiosClient.post('/api/resend-verification', { email: userEmail });
             setSuccessMsg('驗證碼已重新寄出，請查收信箱');
             console.log(successMsg);
             setResendCooldown(60); // 設定 60 秒冷卻時間
