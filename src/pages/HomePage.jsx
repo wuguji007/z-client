@@ -146,7 +146,52 @@ const cardSwiperData = [
     }
 ];
 
- 
+
+export default function Home() {
+    const [productData, setProductData] = useState([]);
+    const [showMenu, setShowMenu] = useState(false);
+    const GCS_JSON_URL = "https://storage.googleapis.com/zonama-project-assets/products.json";
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const cacheBuster = `?t=$(new Date().getTime())`; // 加上時間戳避免快取
+            const res = await fetch(GCS_JSON_URL + cacheBuster);
+            const data = await res.json();
+            setProductData(data);
+            console.log('產品資料載入成功:', data);
+        } catch (error) {
+            console.error('載入產品資料失敗:', error);
+        }
+    };
+
+
+    // 限時搶購商品
+    const flashSaleIds = [1,8,9,12,15,16,2,3];
+    const flashSaleProducts = flashSaleIds
+        .map(id => productData.find(item => item.id === id))
+        .filter(item => item !== undefined); 
+
+    // 熱銷商品
+    const bestSellerIds = [20, 21, 13, 10, 14, 15, 2, 3];
+    const bestSellerProducts = bestSellerIds.map(id => productData.find(item => item.id === id)).filter(item => item !== undefined);
+    
+    // 會員專屬優惠商品
+    const memberOnlyIds = [22,23,24,11,7,5,18,19];
+    const memberOnlyProducts = memberOnlyIds.map(id => productData.find(item => item.id === id)).filter(item => item !== undefined);
+    
+    // 寵物用品
+    const PetSuppliesCollection = productData.filter(item => {
+        return item.category === "寵物用品";
+    });
+    
+    // 食品飲料
+    const FoodAndBeverage = productData.filter(item => (item.id >= 2 && item.id <= 7) || (item.id >= 29 && item.id <= 34));
+    
+
 const CardSwiper = () => {
     return (
         <>
@@ -165,10 +210,11 @@ const CardSwiper = () => {
                         1024: { slidesPerView: 4, spaceBetween: 12 }
                         }}
                     >
-                        {cardSwiperData.map((card) => (
+                        {flashSaleProducts.map((card) => (
                         <SwiperSlide key={card.id} className="swiper-slide">
                             <div className="card product-card d-flex flex-column justify-content-between h-auto rounded-4 p-3 p-md-5">
-                                <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} />
+                                    <img src={card.image} className="card-img-top mb-0 mb-md-4" alt={card.title} />
+                                    {/* <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} /> */}
                                 <div className="d-flex flex-column justify-content-between h-100">
                                     <div className="card-body p-0 mb-4">
                                         <h5 className="card-title fw-bold text-primary-950">{card.title}</h5>                                    
@@ -189,7 +235,7 @@ const CardSwiper = () => {
 }
 
 
-const GreyCardSwiper = () => {
+const GreyCardSwiper = ({items}) => {
     return (
         <>
             <div className="row">
@@ -206,10 +252,10 @@ const GreyCardSwiper = () => {
                         1024: { slidesPerView: 4, spaceBetween: 12 }
                         }}
                     >
-                        {cardSwiperData.map((card) => (
+                        {items.map((card) => (
                         <SwiperSlide key={card.id} className="swiper-slide">
                             <div className="card product-card-gray d-flex flex-column justify-content-between h-auto rounded-4 border-0 p-3 p-md-5">
-                                <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} />
+                                <img src={card.image} className="card-img-top mb-0 mb-md-4" alt={card.title} />
                                 <div className="d-flex flex-column justify-content-between h-100">
                                     <div className="card-body p-0 mb-4">
                                         <h5 className="card-title fw-bold text-primary-950">{card.title}</h5>
@@ -233,7 +279,7 @@ const GreyCardSwiper = () => {
 //精選推薦區-網格卡片輪播元件
 const products = cardSwiperData;
 
-const CardCarousel = () => {
+const CardCarousel = ({items}) => {
     const [activeIndex, setActiveIndex] = useState(0);
     
     // 拖曳/滑動相關 State (整合滑鼠與觸控)
@@ -249,8 +295,8 @@ const CardCarousel = () => {
 
     // 將產品分組(Chunks) 
     const slides = [];
-    for (let i = 0; i < products.length; i += itemsPerSlide) {
-    slides.push(products.slice(i, i + itemsPerSlide));
+    for (let i = 0; i < items.length; i += itemsPerSlide) {
+    slides.push(items.slice(i, i + itemsPerSlide));
     }
 
     const nextSlide = () => {
@@ -371,13 +417,18 @@ const CardCarousel = () => {
                                             col-md-6: 電腦雙欄 (每頁6個 = 3行) 
                                         */
                                             <div key={product.id} className="col-12 col-md-6">
-                                                <div className="grid-card product-card">
+                                                <div className="grid-card product-card p-2 h-100">
                                                     <div className="row g-0">
                                                         <div className="col-6">
                                                             <div className="card-img-wrapper">
-                                                                <img 
+                                                                {/* <img 
                                                                 src={`${import.meta.env.BASE_URL}${product.image}`} 
                                                                 className="card-img-top" 
+                                                                alt={product.title} 
+                                                                /> */}
+                                                                <img 
+                                                                src={product.image}
+                                                                className="card-img-top p-3" 
                                                                 alt={product.title} 
                                                                 />
                                                             </div>
@@ -431,10 +482,6 @@ const CardCarousel = () => {
 };
 //精選推薦區-網格卡片輪播元件
 
-
-
-export default function Home() {
-    const [showMenu, setShowMenu] = useState(false);
 
     return (
         <>
@@ -558,7 +605,7 @@ export default function Home() {
                                     </div>
                                 </div>                   
                                 <div>
-                                    <GreyCardSwiper />
+                                    <GreyCardSwiper items={bestSellerProducts} />
                                 </div>
                             </div>
                             <div className="w-100">
@@ -571,7 +618,7 @@ export default function Home() {
                                     </div>
                                 </div>                   
                                 <div>
-                                    <GreyCardSwiper />
+                                    <GreyCardSwiper items={memberOnlyProducts} />
                                 </div>
                             </div>
                         </div>
@@ -612,7 +659,7 @@ export default function Home() {
                             </div> */}
                             {/* 右側網格卡片輪播 */}
                             <div className="col-12 col-md-8">                           
-                                <CardCarousel />                            
+                                <CardCarousel items={PetSuppliesCollection} />                            
                             </div>                        
                         </div>
                     </div>
@@ -640,7 +687,7 @@ export default function Home() {
                             </div>
                             {/* 網格卡片輪播 */}
                             <div className="col-12 col-md-8">                           
-                                <CardCarousel />                            
+                                <CardCarousel items={FoodAndBeverage} />                            
                             </div>                        
                         </div>
                     </div>
