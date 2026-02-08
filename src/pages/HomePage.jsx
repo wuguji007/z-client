@@ -650,7 +650,7 @@ const CardCarousel = ({items}) => {
                         <div className="row bg-primar-50 d-flex flex-column flex-md-row">
                             {/* 左側商品宣傳圖 */}
                             <div className="col-12 col-md-4 border-4 px-md-0 mb-3 mb-md-0">
-                                <img src={`${import.meta.env.BASE_URL}images/promo-pet.svg`} alt="pet-supplies" className='promo-img h-100'/>
+                                <img src={`${import.meta.env.BASE_URL}images/promo-pet.svg`} alt="pet-supplies" className='promo-img'/>
                             </div>
                             {/* <div className="col-12 col-md-4 px-md-0">
                                 <div className="border-4 mb-3 mb-md-0">
