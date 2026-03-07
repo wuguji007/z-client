@@ -128,7 +128,7 @@ export default function Verify({email}) {
                                                 inputMode="numeric"
                                             />
                                             <small className="text-muted d-block text-center mt-2">
-                                                驗證碼有效期限: 30 分鐘
+                                                驗證碼有效期限: 10 分鐘
                                             </small>
                                         </div>
 

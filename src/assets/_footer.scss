@@ -22,6 +22,18 @@
     min-width: 180px;
 }
 
+.company-info {
+    font-size: 14px;
+}
+
+
+@media (max-width: 568px) {
+    .company-info {
+        padding-left: 2rem;
+        font-size: 12px;
+    }
+}
+
 .back-to-top-btn {
     position: absolute;
     width: 64px;

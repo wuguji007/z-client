@@ -27,19 +27,15 @@ export default function Footer() {
             </div>
 
             {/* 水平線 */}
-            <div className="container flex-grow-1 bg-white mb-3 mb-md-5" style={{ height: '1px' }}></div>
+            <div className="container bg-white mb-6 mb-md-5" style={{ height: '1px' }}></div>
             
-            <div className="container d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center text-white p-md-0">
+            <div className="company-info container d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center text-white p-md-0">
                 <p>新北市永和區秀朗路一段12巷1弄128號</p>
                 <div className="d-flex flex-column flex-md-row">
                     <p className="mb-3 mb-md-0 me-md-5"><span className="me-3"><Mail size={24} /></span>zonama.ecTW@eshop.io</p>
                     <p><span className="me-3"><Phone size={24} /></span>02-1888-2878 #9</p>
                 </div>
             </div>
-
-            <button className="btn rounded-circle back-to-top-btn border-none">
-                <a href="#nav-top" className="back-to-top"><ArrowUp size={40} /></a>              
-            </button>           
         </div>
     )
 }

@@ -51,29 +51,28 @@ h1 {
 }
 
 
-
 .container {
-  width: 1296px;
+  max-width: 1296px;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .container {
-    width: 768px;
+    max-width: 768px;
     margin: 0 auto;
   }
 }
 
 @media (max-width: 568px) {
   .container {
-    width: 568px;
+    max-width: 568px;
     margin: 0 auto;
   }
 }
 
 @media (max-width: 378px) {
   .container {
-    width: 375px;
+    max-width: 375px;
     margin: 0 auto;
   }
 }
@@ -125,3 +124,7 @@ h1 {
   }
 }
 
+.form-control::placeholder {
+  color: $gray-300;
+  opacity: 1;
+}
