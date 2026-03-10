@@ -234,7 +234,8 @@
 @media (max-width: 768px) {
     .card {
         min-width: 200px;
-        height: 340px;
+        // height: 340px;
+        height: auto;
     }  
 
     .card-title {

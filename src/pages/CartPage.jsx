@@ -432,7 +432,7 @@ export default function CartPage({ products, setProducts, checkLoggedIn }) {
                                         return (
                                         <div
                                             key={c.code}
-                                            className="card d-flex flex-row align-items-center p-4 mb-3"
+                                            className="card d-flex flex-row align-items-center p-4 mb-3 h-auto"
                                             onClick={() => handleCouponSelect(c)}
                                             style={ isSelected ? { borderColor: 'var(--bs-primary-500)', boxShadow: '0 0 0 0.25rem rgba(13, 206, 219, 0.5)', cursor: 'pointer' } : {cursor: 'pointer'}}
                                         >
