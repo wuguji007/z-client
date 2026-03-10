@@ -10,8 +10,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>z-ecommerce</title>
-    <script type="module" crossorigin src="/z-client/assets/index-SvQx3g1F.js"></script>
-    <link rel="stylesheet" crossorigin href="/z-client/assets/index-CEDLwODB.css">
+    <script>
+      // ── 藍新 ReturnURL 導頁處理 ────────────────────────────
+      // 藍新實際導回的 URL 格式（由藍新決定，無法自訂 query）：
+      //   index.html?Status=SUCCESS&merchantOrderNo=ZNM-xxx&Amt=419&...
+      //
+      // 把藍新的 query string 轉成 hash 路由，
+      // 讓 HashRouter 啟動時直接解析到 #/payment-complete
+      // ──────────────────────────────────────────────────────
+      // (function () {
+      //   var search = window.location.search;
+      //   if (!search) return;
+
+      //   var params = new URLSearchParams(search);
+
+      //   // 藍新回傳的參數名稱
+      //   var merchantOrderNo = params.get('merchantOrderNo');
+      //   var status          = params.get('Status') || params.get('status') || '';
+      //   var amt             = params.get('Amt')    || params.get('amt')    || '0';
+
+      //   console.log('[ReturnURL] merchantOrderNo:', merchantOrderNo, '| Status:', status, '| Amt:', amt);
+
+      //   if (!merchantOrderNo) {
+      //     console.log('[ReturnURL] 無 merchantOrderNo，正常載入');
+      //     return;
+      //   }
+
+      //   // 組成 hash 路由，帶上藍新回傳的參數
+      //   var hash = '#/payment-complete'
+      //     + '?orderNo='  + encodeURIComponent(merchantOrderNo)
+      //     + '&status='   + encodeURIComponent(status)
+      //     + '&amt='      + encodeURIComponent(amt);
+
+      //   console.log('[ReturnURL] 導向 →', hash);
+
+      //   // location.replace 一步完成：清掉 query string 並設定 hash
+      //   window.location.replace(window.location.pathname + hash);
+      // })();
+    </script>
+    <script type="module" crossorigin src="/z-client/assets/index-BHZph0Qn.js"></script>
+    <link rel="stylesheet" crossorigin href="/z-client/assets/index-oHPObtXU.css">
   </head>
   <body>
     <div id="root"></div>

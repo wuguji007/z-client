@@ -12,6 +12,7 @@ import MemberCenter from './pages/MemberCenter.jsx';
 import CartPage from './pages/CartPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import PaymentCompletePage from './pages/PaymentCompletePage.jsx';
+import ProductDetailPage from './pages/productDetailPage.jsx';
 
 
 function App() {
@@ -68,10 +69,12 @@ function App() {
     setProducts(prev => {
       // 檢查購物車是否已有此商品
       const isExists = prev.find(item => item.id === product.id);
+      const addQuantity = product.quantity || 1;
+
       // 商品已存在? 在原有商品上增加數量：否則新增一個newProduct
       if (isExists) {
         return prev.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + addQuantity } : item
         );
       }
 
@@ -160,6 +163,11 @@ function App() {
             <Route path='/verify' element={<VerifyPage />} />
             <Route path='/forgot-password' element={<ForgotPasswordPage />} />
             <Route path='/reset-password' element={<ResetPasswordPage />} />
+
+            <Route
+              path="/product/:id"
+              element={<ProductDetailPage handleAddToCart={handleAddToCart} />}
+            />
             
             <Route
               path="/cart"

@@ -40,10 +40,19 @@ export default function CartPage({ products, setProducts, checkLoggedIn }) {
         setProducts(prev => prev.map(p => p.id === id ? { ...p, checked: !p.checked } : p));  
     };
   
-    const removeProduct = (id) => {    
-        setProducts(prev => prev.filter(p => p.id !== id)); 
+    const handleRemoveProduct = (id) => {    
+        if (window.confirm('確定要移除此商品嗎？')) {
+            setProducts(prev => prev.filter(p => p.id !== id)); 
+        }
     };
 
+    const handleRemoveItem = (id) => {
+    if (window.confirm('確定要移除此商品嗎？')) {
+      // 直接把該 ID 的商品從陣列中過濾掉
+      setProducts(prevItems => prevItems.filter(item => item.id !== id));
+      // setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+    }
+  };
 
     // 使用useMemo，避免每次渲染時重複執行filter和reduce等運算
     const cartStats = useMemo(() => {
@@ -278,7 +287,7 @@ export default function CartPage({ products, setProducts, checkLoggedIn }) {
                                             {/* 刪除按鈕 */}
                                             <button 
                                             className="btn btn-link text-primary p-0 mb-1" 
-                                            onClick={() => removeProduct(item.id)}
+                                            onClick={() => handleRemoveProduct(item.id)}
                                             title="刪除商品"
                                             >
                                             <Trash2 size={18} />

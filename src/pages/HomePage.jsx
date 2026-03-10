@@ -159,7 +159,7 @@ export default function Home({handleAddToCart}) {
             const res = await fetch(GCS_JSON_URL + cacheBuster);
             const data = await res.json();
             setProductData(data);
-            console.log('產品資料載入成功:', data);
+            // console.log('產品資料載入成功:', data);
         } catch (error) {
             console.error('載入產品資料失敗:', error);
         }
@@ -222,15 +222,21 @@ const CardSwiper = () => {
                         {flashSaleProducts.map((p) => (
                             <SwiperSlide key={p.id} className="swiper-slide">
                                 <div className="card product-card d-flex flex-column justify-content-between h-auto rounded-4 p-3 p-md-5">
+                                    <Link to={`/product/${p.id}`}>
                                         <img src={p.image} className="card-img-top mb-0 mb-md-4" alt={p.title} />
                                         {/* <img src={`${import.meta.env.BASE_URL}${card.image}`} className="card-img-top mb-0 mb-md-4" alt={card.title} /> */}
+                                    </Link>
                                     <div className="d-flex flex-column justify-content-between h-100">
                                         <div className="card-body p-0 mb-4">
-                                            <h5 className="card-title fw-bold text-primary-950">{p.title}</h5>                                    
+                                            <Link to={`/product/${p.id}`}>
+                                                <h5 className="card-title fw-bold text-primary-950">{p.title}</h5>                                    
+                                            </Link>
                                         </div>                                        
                                         <div className="product-card-footer">
-                                            <p className="card-text text-primary-950">NT${p.price} <del className="text-gray-300 fs-6 fw-normal">NT${p.origin_price}</del>
+                                            <Link to={`/product/${p.id}`}>
+                                                <p className="card-text text-primary-950 mb-2">NT${p.price} <del className="text-gray-300 fs-6 fw-normal">NT${p.origin_price}</del>
                                             </p>
+                                            </Link>
                                             <button
                                                 type='button'
                                                 className="btn btn-primary fw-bold py-4 rounded-pill w-100"
@@ -270,13 +276,20 @@ const GreyCardSwiper = ({items}) => {
                         {items.map((p) => (
                             <SwiperSlide key={p.id} className="swiper-slide">
                                 <div className="card product-card-gray d-flex flex-column justify-content-between h-auto rounded-4 border-0 p-3 p-md-5">
-                                    <img src={p.image} className="card-img-top mb-0 mb-md-4" alt={p.title} />
+                                    <Link to={`/product/${p.id}`}>
+                                        <img src={p.image} className="card-img-top mb-0 mb-md-4" alt={p.title} />
+                                    </Link>
                                     <div className="d-flex flex-column justify-content-between h-100">
                                         <div className="card-body p-0 mb-4">
-                                            <h5 className="card-title fw-bold text-primary-950">{p.title}</h5>
+                                            <Link to={`/product/${p.id}`}>
+                                                <h5 className="card-title fw-bold text-primary-950">{p.title}</h5>
+                                            </Link>
                                         </div>
                                         <div className="product-card-footer">
-                                            <p className="card-text text-primary-950">NT${p.price} <del className="text-gray-300 fs-5 fw-normal">NT${p.origin_price}</del></p>
+                                            <Link to={`/product/${p.id}`}>
+                                                <p className="card-text text-primary-950 mb-2">NT${p.price} <del className="text-gray-300 fs-5 fw-normal">NT${p.origin_price}</del>
+                                                </p>
+                                            </Link>
                                             <button
                                                 type='button'
                                                 className="card-btn btn btn-primary fw-bold py-3 py-md-4 rounded-pill w-100"
@@ -439,27 +452,33 @@ const CardCarousel = ({items}) => {
                                                     <div className="row g-0">
                                                         <div className="col-6">
                                                             <div className="card-img-wrapper">
-                                                                {/* <img 
-                                                                src={`${import.meta.env.BASE_URL}${product.image}`} 
-                                                                className="card-img-top" 
-                                                                alt={product.title} 
-                                                                /> */}
-                                                                <img 
-                                                                src={p.image}
-                                                                className="card-img-top p-3" 
-                                                                alt={p.title} 
-                                                                />
+                                                                <Link to={`/product/${p.id}`}>
+                                                                    {/* <img 
+                                                                    src={`${import.meta.env.BASE_URL}${product.image}`} 
+                                                                    className="card-img-top" 
+                                                                    alt={product.title} 
+                                                                    /> */}
+                                                                    <img 
+                                                                    src={p.image}
+                                                                    className="card-img-top p-3" 
+                                                                    alt={p.title} 
+                                                                    />
+                                                                </Link>
                                                             </div>
                                                         </div>
                                                                 
                                                         <div className="col-6 d-flex flex-column">
-                                                            <div className="card-body d-flex flex-column p-3">                              
-                                                                <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{p.title}</h6 >
+                                                            <div className="card-body d-flex flex-column p-3">
+                                                                <Link to={`/product/${p.id}`}>
+                                                                    <h6 className="card-title fw-bold fs-5 fs-md-4 mb-1">{p.title}</h6 >
+                                                                </Link>
                                                                 
                                                                 <div className="d-flex justify-content-between align-items-start align-items-md-start flex-column align-items-start mt-auto pt-2 border-top">
                                                                     <div className="d-flex flex-column align-items-start align-items-md-start">
-                                                                        <span className="text-primary-950 fw-bold fs-4">NT${p.price}</span>
-                                                                        <del className='text-gray-300 fs-6 fs-md-5 mb-2'>${p.origin_price}</del>
+                                                                        <Link to={`/product/${p.id}`}>
+                                                                            <span className="text-primary-950 fw-bold fs-4 mb-2">NT${p.price}</span>
+                                                                            <del className='text-gray-300 fs-6 fs-md-5 mb-2'>${p.origin_price}</del>
+                                                                        </Link>
                                                                     </div>
                                                                     <button
                                                                         type='button'
