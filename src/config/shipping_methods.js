@@ -16,14 +16,14 @@ export const SHIPPING_METHODS = [
     fee: 0,          // 費用由購物車計算決定，此處僅顯示用
     badge: '預設',
   },
-  {
-    id: 'CVS_PICKUP',
-    label: '超商取貨',
-    sublabel: '7-11 / 全家，3-5 個工作天',
-    icon: Store,
-    fee: 60,
-    badge: null,
-  },
+  // {
+  //   id: 'CVS_PICKUP',
+  //   label: '超商取貨',
+  //   sublabel: '7-11 / 全家，3-5 個工作天',
+  //   icon: Store,
+  //   fee: 60,
+  //   badge: null,
+  // },
   {
     id: 'SELF_PICKUP',
     label: '門市自取',

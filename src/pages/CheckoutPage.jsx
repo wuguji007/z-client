@@ -89,11 +89,7 @@ export default function CheckoutPage({ formData, setFormData, onReset }) {
             form.submit(); // 離開前端，跳轉至藍新付款頁
         
             onReset();
-        // 模擬金流處理與成功跳轉
-        // setTimeout(() => {
-        //     setIsSubmitting(false);
-        //     navigate('/payment-complete');
-        // }, 1500);
+
         } catch (err) {
             console.error('建立訂單失敗:', err);
             setErrMsg('建立訂單失敗，請稍後再試');
@@ -101,7 +97,7 @@ export default function CheckoutPage({ formData, setFormData, onReset }) {
         }
     };
 
-    /* ── 共用樣式 helper ── */
+    /* 共用樣式 helper */
     const optionCard = (isSelected) =>
         `d-flex align-items-center gap-3 p-3 rounded-3 border ${
         isSelected ? 'border-primary bg-primary-50' : 'border-gray-200 bg-white'
@@ -180,7 +176,7 @@ export default function CheckoutPage({ formData, setFormData, onReset }) {
                                 </div>
 
 
-                                {/* ── 運送方式 ── */}
+                                {/* 運送方式 */}
                                 <h5 className="border-top border-gray-100 text-primary fw-bold px-4 px-md-6 pt-4 mb-3">運送方式</h5>
                                 <div className="px-4 px-md-6 pt-2 pb-6">
                                     <div className="d-flex flex-column gap-3">
@@ -228,7 +224,7 @@ export default function CheckoutPage({ formData, setFormData, onReset }) {
                                     </div>
                                 </div>
 
-                                {/* ── 付款方式 ── */}
+                                {/* 付款方式 */}
                                 <h5 className="border-top border-gray-100 text-primary fw-bold px-4 px-md-6 pt-4 mb-3">付款方式</h5>
                                 <div className="px-4 px-md-6 pt-2">
                                     <div className="d-flex flex-column gap-3">
